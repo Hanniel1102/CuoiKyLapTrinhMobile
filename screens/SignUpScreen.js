@@ -83,7 +83,7 @@ export default function SignUp({ navigation }) {
         </View>
 
         <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
-          <Text style={styles.signUpButtonText}>Sign Up</Text>
+          <Text style={styles.signUpButtonText} onPress={() => navigation.navigate("Home")}>Sign Up</Text>
         </TouchableOpacity>
 
         <Text style={styles.signupText}>
