@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet, ActivityIndicator, Image } from 'react-native';
-import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
-// Đường dẫn Google Books API
-const API_BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q=';
+const API_BASE_URL = 'http://192.168.194.66:3000/novels'; // Đường dẫn API
 
 const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -12,30 +11,26 @@ const SearchScreen = () => {
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
-  // Hàm tìm kiếm theo tên truyện
   const fetchBooksByTitle = async (title) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}${title}`);
-      return response.data.items || [];
-    } catch (error) {
+      const response = await axios.get(`${API_BASE_URL}?title_like=${encodeURIComponent(title)}`);
+      return response.data; // Không có .items hay .volumeInfo
+    } catch (error) {   
       console.error('Lỗi khi lấy sách theo tên truyện:', error);
       throw error;
     }
   };
-
-  // Hàm tìm kiếm theo tác giả
   const fetchBooksByAuthor = async (author) => {
     try {
-      const encodedAuthor = encodeURIComponent(author); // Mã hóa tên tác giả
-      const response = await axios.get(`${API_BASE_URL}inauthor:${encodedAuthor}`);
-      return response.data.items || [];
+      const response = await axios.get(`${API_BASE_URL}?authors_like=${encodeURIComponent(author)}`);
+      return response.data;
     } catch (error) {
       console.error('Lỗi khi lấy sách theo tác giả:', error);
       throw error;
     }
   };
 
-  // Hàm tìm kiếm theo từng ký tự nhập vào
+  // Hàm tìm kiếm theo từ khóa
   const handleSearch = async (query) => {
     setLoading(true);
     setSearchQuery(query);
@@ -48,18 +43,16 @@ const SearchScreen = () => {
 
     try {
       let books = [];
-      
-      // Kiểm tra xem có phải tìm kiếm theo tác giả không (thêm dấu `author:` để tìm theo tác giả)
       const isAuthorSearch = query.includes('author:');
       const searchTerm = isAuthorSearch ? query.replace('author:', '').trim() : query;
 
       if (isAuthorSearch) {
-        // Tìm kiếm theo tác giả
-        books = await fetchBooksByAuthor(searchTerm);
+        books = await fetchBooksByAuthor(searchTerm); // Tìm kiếm theo tác giả
       } else {
-        // Tìm kiếm theo tên truyện
-        books = await fetchBooksByTitle(searchTerm);
+        books = await fetchBooksByTitle(searchTerm); // Tìm kiếm theo tên truyện
       }
+
+      console.log('Kết quả tìm kiếm:', books); // Kiểm tra kết quả tìm kiếm
 
       setSearchResults(books);
       setLoading(false);
@@ -79,7 +72,7 @@ const SearchScreen = () => {
       <Text style={styles.title}>Tìm Kiếm Truyện</Text>
       <TextInput
         style={styles.searchInput}
-        placeholder="Nhập tên truyện hoặc tác giả (Ví dụ: author:J.K. Rowling)"
+        placeholder="Nhập tên truyện hoặc tác giả"
         value={searchQuery}
         onChangeText={(text) => handleSearch(text)} // Tìm kiếm khi thay đổi văn bản
         placeholderTextColor="#888"
@@ -92,16 +85,16 @@ const SearchScreen = () => {
             searchResults.map((book, index) => (
               <TouchableOpacity key={index} style={styles.bookItem} onPress={() => handleBookPress(book)}>
                 <View style={styles.bookContent}>
-                  {book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail ? (
-                    <Image source={{ uri: book.volumeInfo.imageLinks.thumbnail }} style={styles.bookImage} />
+                  {book.link_thumbnail ? (
+                    <Image source={{ uri: book.link_thumbnail }} style={styles.bookImage} />
                   ) : (
                     <Text>Không có ảnh bìa</Text>
                   )}
                   <View style={styles.bookTextContainer}>
-                    <Text style={styles.bookTitle}>{book.volumeInfo.title}</Text>
+                    <Text style={styles.bookTitle}>{book.title}</Text>
                     <Text style={styles.bookInfo}>
-                      Tác giả: {book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Chưa có tác giả'}
-                    </Text>
+                      Tác giả: {book.authors ? book.authors.join(', ') : 'Chưa có tác giả'}
+                    </Text>                  
                   </View>
                 </View>
               </TouchableOpacity>

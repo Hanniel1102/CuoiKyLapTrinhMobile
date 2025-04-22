@@ -54,8 +54,8 @@ const FavoriteList = () => {
 
   const renderBookItem = ({ item }) => (
     <View style={styles.bookItem}>
-      <Text style={styles.bookTitle}>{item.volumeInfo.title}</Text>
-      <Text style={styles.bookAuthor}>{item.volumeInfo.authors?.join(', ')}</Text>
+      <Text style={styles.bookTitle}>{item.title}</Text>
+      <Text style={styles.bookAuthor}>{item.authors?.join(', ')}</Text>
       <TouchableOpacity
         style={styles.removeButton}
         onPress={() => removeFromFavorites(item)} // Xóa sách khỏi yêu thích khi nhấn

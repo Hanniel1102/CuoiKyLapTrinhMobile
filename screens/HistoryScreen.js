@@ -45,7 +45,7 @@ const HistoryScreen = () => {
       const updatedHistory = history.filter((item) => item.id !== book.id);
       setHistory(updatedHistory);
       await AsyncStorage.setItem(`history_${username}`, JSON.stringify(updatedHistory));
-      Alert.alert('Removed', `${book.volumeInfo.title} has been removed from history.`);
+      Alert.alert('Removed', `${book.title} has been removed from history.`);
     } catch (error) {
       console.error('Error removing from history:', error);
     }
@@ -60,7 +60,7 @@ const HistoryScreen = () => {
         <ScrollView style={styles.list}>
           {history.map((book, index) => (
             <View key={index} style={styles.historyItem}>
-              <Text style={styles.historyBookTitle}>{book.volumeInfo.title}</Text>
+              <Text style={styles.historyBookTitle}>{book.title}</Text>
               <TouchableOpacity
                 style={styles.removeButton}
                 onPress={() => handleRemoveFromHistory(book)}

@@ -90,11 +90,11 @@ const DetailScreen = ({ route, navigation }) => {
   const renderTabContent = () => {
     switch (activeTab) {
       case 'about':
-        return <Text style={styles.description}>{book.volumeInfo.description || "No description available."}</Text>;
+        return <Text style={styles.description}>{book.description || "No description available."}</Text>;
       case 'chapters':
         return (
           <View style={styles.chapterList}>
-            {book.volumeInfo.chapter?.map((chapter, index) => (
+            {book.chapter?.map((chapter, index) => (
               <TouchableOpacity key={index} style={styles.chapterItem}>
                 <Text style={styles.chapterText}>{chapter}</Text>
               </TouchableOpacity>
@@ -111,7 +111,7 @@ const DetailScreen = ({ route, navigation }) => {
           </View>
         );
       default:
-        return <Text style={styles.description}>{book.volumeInfo.description || "No description available."}</Text>;
+        return <Text style={styles.description}>{book.description || "No description available."}</Text>;
     }
   }; 
 
@@ -125,13 +125,13 @@ const DetailScreen = ({ route, navigation }) => {
       <View style={styles.header}>
         {/* Ảnh bìa sách */}
         <Image
-          source={{ uri: book.volumeInfo.imageLinks?.thumbnail || 'https://via.placeholder.com/100x150.png' }}
+          source={{ uri: book.link_thumbnail || 'https://via.placeholder.com/100x150.png' }}
           style={styles.bookImage}
         />
         <View style={styles.bookInfo}>
-          <Text style={styles.bookTitle}>{book.volumeInfo.title}</Text>
-          <Text style={styles.bookAuthor}>{book.volumeInfo.authors?.join(', ') || 'Unknown Author'}</Text>
-          <Text style={styles.bookCategory}>{book.volumeInfo.categories?.join(', ') || 'No Category'}</Text>
+          <Text style={styles.bookTitle}>{book.title}</Text>
+          <Text style={styles.bookAuthor}>{book.authors?.join(', ') || 'Unknown Author'}</Text>
+          <Text style={styles.bookCategory}>{book.categories?.join(', ') || 'No Category'}</Text>
         </View>
       </View>
 

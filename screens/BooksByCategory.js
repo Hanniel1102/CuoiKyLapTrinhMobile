@@ -33,11 +33,11 @@ const BooksByCategory = ({ route, navigation }) => {
       onPress={() => navigation.navigate('Detail', { book: item })} // Điều hướng tới DetailScreen khi nhấn vào sách
     >
       <Image
-        source={{ uri: item.volumeInfo.imageLinks?.thumbnail }}
+        source={{ uri: item.link_thumbnail }}
         style={styles.bookImage}
       />
-      <Text style={styles.bookTitle}>{item.volumeInfo.title}</Text>
-      <Text style={styles.bookAuthor}>{item.volumeInfo.authors?.join(', ')}</Text>
+      <Text style={styles.bookTitle}>{item.title}</Text>
+      <Text style={styles.bookAuthor}>{item.authors?.join(', ')}</Text>
     </TouchableOpacity>
   );
 

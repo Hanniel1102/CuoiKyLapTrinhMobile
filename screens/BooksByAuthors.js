@@ -11,9 +11,9 @@ const BooksByAuthors = ({ route ,navigation}) => {
           style={styles.bookItem}
           onPress={() => navigation.navigate('Detail', { book: item })} // Điều hướng tới DetailScreen khi nhấn vào sách
         >
-      {item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.thumbnail ? (
+      {item && item.link_thumbnail ? (
         <Image
-          source={{ uri: item.volumeInfo.imageLinks.thumbnail }}
+          source={{ uri: item.link_thumbnail }}
           style={styles.bookImage}
         />
       ) : (
@@ -21,7 +21,7 @@ const BooksByAuthors = ({ route ,navigation}) => {
           <Text style={styles.noImageText}>No Image</Text>
         </View>
       )}
-      <Text style={styles.bookTitle}>{item.volumeInfo.title}</Text>
+      <Text style={styles.bookTitle}>{item.title}</Text>
     </TouchableOpacity>
   );
 

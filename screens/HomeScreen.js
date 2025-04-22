@@ -28,7 +28,7 @@ const BookItem = ({ book }) => {
       console.error('Error saving to history:', error);
     }
   };
-  const imageUrl = book?.volumeInfo?.imageLinks?.thumbnail || 'https://via.placeholder.com/100x150'; // Thêm ảnh mặc định nếu không có ảnh
+  const imageUrl = book?.link_thumbnail || 'https://via.placeholder.com/100x150'; // Thêm ảnh mặc định nếu không có ảnh
 
   return (
     <TouchableOpacity style={styles.book} onPress={handleBookPress}>
@@ -36,7 +36,7 @@ const BookItem = ({ book }) => {
         source={{ uri: imageUrl }} // Nếu không có ảnh, sẽ dùng ảnh mặc định
         style={styles.bookImage}
       />
-      <Text style={styles.bookTitle}>{book?.volumeInfo?.title || 'Không có tiêu đề'}</Text>
+      <Text style={styles.bookTitle}>{book?.title || 'Không có tiêu đề'}</Text>
     </TouchableOpacity>
   );
 };
@@ -139,8 +139,8 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
-      <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Sách Mới Cập Nhật</Text>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Truyện Mới Cập Nhật</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={styles.bookContainer}>
               {newlyUpdatedBooks.map((book, index) => (
@@ -151,7 +151,7 @@ const HomeScreen = () => {
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Sách Hot Gần Đây</Text>
+          <Text style={styles.sectionTitle}>Truyện Hot Gần Đây</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={styles.bookContainer}>
               {recentHotBooks.map((book, index) => (
@@ -180,7 +180,7 @@ const HomeScreen = () => {
           <Text style={styles.sectionTitle}>Tác Giả Nổi Bật</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={styles.bookContainer}>
-              {authors.slice(0, 5).map((author, index) => (  // Chỉ hiển thị 5 tác giả đầu tiên
+              {authors.map((author, index) => (  // Chỉ hiển thị 5 tác giả đầu tiên
                 <TouchableOpacity
                   key={index}
                   style={styles.author}
