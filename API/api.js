@@ -65,3 +65,13 @@ export const fetchCategories = async (booksHot) => {
       throw error;
     }
   };
+  // Hàm để lấy sách theo tên truyện
+export const fetchBooksByTitle = async (title) => {
+  try {
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${title}`);
+    return response.data.items || [];
+  } catch (error) {
+    console.error('Lỗi khi lấy sách theo tên truyện:', error);
+    throw error;
+  }
+};

@@ -1,23 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator, Image } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, ActivityIndicator, Image, Alert  } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { fetchNewlyUpdatedBooks, fetchRecentHotBooks, fetchAuthors, fetchCategories, fetchBooksByAuthors } from '../API/api.js'; // Import API cần thiết
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import { fetchNewlyUpdatedBooks, fetchRecentHotBooks, fetchAuthors, fetchCategories, fetchBooksByCategory , fetchBooksByAuthors } from '../API/api.js';
 
-// Component tái sử dụng cho hiển thị sách
 const BookItem = ({ book }) => {
   const navigation = useNavigation();
+  const [username, setUsername] = useState('');
+  
+  const handleBookPress = async () => {
+    try {
+      const username = await AsyncStorage.getItem('username');
+      if (!username) {
+        Alert.alert('Lỗi', 'Vui lòng đăng nhập để lưu lịch sử!');
+        return;
+      }
+  
+      const history = await AsyncStorage.getItem(`history_${username}`);
+      const parsedHistory = history ? JSON.parse(history) : [];
+  
+      const updatedHistory = [...parsedHistory, book];
+  
+      await AsyncStorage.setItem(`history_${username}`, JSON.stringify(updatedHistory));
+  
+      navigation.navigate('Detail', { book });
+    } catch (error) {
+      console.error('Error saving to history:', error);
+    }
+  };
+  const imageUrl = book?.volumeInfo?.imageLinks?.thumbnail || 'https://via.placeholder.com/100x150'; // Thêm ảnh mặc định nếu không có ảnh
 
   return (
-    <TouchableOpacity style={styles.book} onPress={() => navigation.navigate('Detail', { book })}>
-      {book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail ? (
-        <Image
-          source={{ uri: book.volumeInfo.imageLinks.thumbnail }}
-          style={styles.bookImage}
-        />
-      ) : (
-        <Text>Không có hình ảnh</Text>
-      )}
-      <Text style={styles.bookTitle}>{book.volumeInfo.title}</Text>
+    <TouchableOpacity style={styles.book} onPress={handleBookPress}>
+      <Image
+        source={{ uri: imageUrl }} // Nếu không có ảnh, sẽ dùng ảnh mặc định
+        style={styles.bookImage}
+      />
+      <Text style={styles.bookTitle}>{book?.volumeInfo?.title || 'Không có tiêu đề'}</Text>
     </TouchableOpacity>
   );
 };
@@ -27,32 +46,27 @@ const HomeScreen = () => {
   const [recentHotBooks, setRecentHotBooks] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [userStories, setUserStories] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
 
-  const navigation = useNavigation(); // Hook điều hướng
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchBooks = async () => {
       setLoading(true);
-      const query = searchQuery.trim() === '' ? 'fiction' : searchQuery;
 
       try {
-        // Fetch newly updated books
         const booksNew = await fetchNewlyUpdatedBooks();
         setNewlyUpdatedBooks(booksNew);
 
-        // Fetch recent hot books
         const booksHot = await fetchRecentHotBooks();
         setRecentHotBooks(booksHot);
 
-        // Get unique authors
         const authorsList = await fetchAuthors(booksHot);
-        setAuthors(authorsList);
+        setAuthors(authorsList); 
 
-        // Get unique categories
         const categoriesList = await fetchCategories(booksHot);
-        setCategories(categoriesList);
+        setCategories(categoriesList.slice(0, 5)); 
 
         setLoading(false);
       } catch (error) {
@@ -61,16 +75,37 @@ const HomeScreen = () => {
       }
     };
 
+    const fetchUserStories = async () => {
+      try {
+        const username = await AsyncStorage.getItem('username');
+        if (!username) {
+          Alert.alert('Lỗi', 'Vui lòng đăng nhập để xem truyện đã đăng!');
+          setLoading(false);
+          return;
+        }
+
+        const savedStories = await AsyncStorage.getItem(`stories_${username}`);
+        if (savedStories) {
+          setUserStories(JSON.parse(savedStories)); 
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error('Lỗi khi lấy truyện của người dùng:', error);
+        setLoading(false);
+      }
+    };
+
     fetchBooks();
-  }, [searchQuery]);
+    fetchUserStories(); 
+
+  }, []); 
 
   // Hàm lấy sách theo tác giả khi tác giả được chọn
   const handleAuthorPress = async (author) => {
-    setLoading(true); // Hiển thị loading khi đang lấy sách
+    setLoading(true); 
     try {
-      const booksByAuthor = await fetchBooksByAuthors(author); // Lấy sách theo tác giả
+      const booksByAuthor = await fetchBooksByAuthors(author); 
       setLoading(false);
-      // Điều hướng đến màn hình 'BooksByAuthor' và truyền dữ liệu sách của tác giả
       navigation.navigate('BooksByAuthors', { author, books: booksByAuthor });
     } catch (error) {
       console.error('Lỗi khi lấy sách của tác giả:', error);
@@ -78,24 +113,33 @@ const HomeScreen = () => {
     }
   };
 
+  // Fetch sách theo thể loại khi thể loại được chọn
+  const handleCategoryPress = async (category) => {
+    setLoading(true);
+    try {
+      const books = await fetchBooksByCategory(category);
+      setLoading(false);
+
+      navigation.navigate('BooksByCategory', { category, books });
+    } catch (error) {
+      console.error('Lỗi khi lấy sách:', error);
+      setLoading(false);
+    }
+  };
+
+  const handleViewAllAuthors = () => {
+    navigation.navigate('AuthorList', { authors });
+  };
+
+  
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />;
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.searchBarContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Tìm kiếm sách"
-          value={searchQuery}
-          onChangeText={(text) => setSearchQuery(text)}
-          placeholderTextColor="#888"
-        />
-      </View>
-
       <ScrollView style={styles.scrollContainer}>
-        <View style={styles.section}>
+      <View style={styles.section}>
           <Text style={styles.sectionTitle}>Sách Mới Cập Nhật</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={styles.bookContainer}>
@@ -116,31 +160,53 @@ const HomeScreen = () => {
             </View>
           </ScrollView>
         </View>
+{/* 
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Truyện Được Đăng Bởi Người Dùng</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={styles.bookContainer}>
+              {userStories.length > 0 ? (
+                userStories.map((story, index) => (
+                  <BookItem key={index} book={story} />
+                ))
+              ) : (
+                <Text>Chưa có truyện nào được đăng!</Text>
+              )}
+            </View>
+          </ScrollView>
+        </View> */}
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Tác Giả Nổi Bật</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={styles.bookContainer}>
-              {authors.map((author, index) => (
+              {authors.slice(0, 5).map((author, index) => (  // Chỉ hiển thị 5 tác giả đầu tiên
                 <TouchableOpacity
                   key={index}
                   style={styles.author}
-                  onPress={() => handleAuthorPress(author)} // Gọi hàm khi nhấn vào tác giả
+                  onPress={() => handleAuthorPress(author)} 
                 >
                   <Text style={styles.authorName}>{author}</Text>
                 </TouchableOpacity>
               ))}
             </View>
           </ScrollView>
+          <TouchableOpacity onPress={() => navigation.navigate('AuthorList', { authors })}>
+            <Text style={styles.viewAll}>Xem tất cả</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Thể Loại Nổi Bật</Text>
           <View style={styles.categoriesList}>
             {categories.map((category, index) => (
-              <View key={index} style={styles.category}>
+              <TouchableOpacity
+                key={index}
+                style={styles.category}
+                onPress={() => handleCategoryPress(category)} 
+              >
                 <Text style={styles.categoryName}>{category}</Text>
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
         </View>
@@ -153,21 +219,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  searchBarContainer: {
-    marginTop: 10,
-    paddingHorizontal: 20,
-    height: 60,
-    justifyContent: 'center',
-  },
-  searchInput: {
-    height: 40,
-    borderColor: '#ddd',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingLeft: 10,
-    fontSize: 16,
-    color: '#333',
   },
   scrollContainer: {
     paddingHorizontal: 20,
@@ -231,6 +282,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  viewAll: {
+    color: '#FF6347',
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 10,
+    textDecorationLine: 'underline',
   },
 });
 

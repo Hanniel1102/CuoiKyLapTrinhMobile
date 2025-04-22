@@ -1,23 +1,57 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Switch, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Switch, Image, Alert } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import AsyncStorage from "@react-native-async-storage/async-storage"; // Import AsyncStorage
 
 export default function SignUp({ navigation }) {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
-  const handleSignUp = () => {
+  const isValidEmail = (email) => {
+    // Biểu thức chính quy kiểm tra định dạng email
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return regex.test(email);
+  };
+  
+  const handleSignUp = async () => {
     if (password !== confirmPassword) {
       setError("Passwords do not match!");
       return;
     }
+    if (!isValidEmail(email)) {
+      setError("Email is not valid!");
+      return;
+    }
     setError(""); // Xóa lỗi nếu nhập đúng
-    // Xử lý đăng ký (Gửi dữ liệu lên server, lưu vào database...)
-    console.log("User signed up:", { password });
-    navigation.navigate("Home");
+
+    // Lưu thông tin người dùng vào AsyncStorage
+    try {
+      // Lấy danh sách các tài khoản đã có trong AsyncStorage
+      const storedAccounts = await AsyncStorage.getItem("accounts");
+      let accounts = storedAccounts ? JSON.parse(storedAccounts) : [];
+
+      // Kiểm tra xem username đã tồn tại chưa
+      const existingUser = accounts.find(account => account.username === username);
+      if (existingUser) {
+        setError("Username đã tồn tại. Vui lòng chọn username khác.");
+        return;
+      }
+      // Thêm tài khoản mới vào danh sách
+      accounts.push({ username, email, password });
+      // Lưu lại danh sách tài khoản vào AsyncStorage
+      await AsyncStorage.setItem("accounts", JSON.stringify(accounts));
+
+      Alert.alert("Thành công", "Đăng ký thành công!");
+
+      navigation.navigate("Login");
+    } catch (error) {
+      console.error("Lỗi khi lưu thông tin người dùng:", error);
+    }
   };
 
   return (
@@ -39,20 +73,31 @@ export default function SignUp({ navigation }) {
 
         <View style={styles.inputContainer}>
           <Icon name="user" size={24} color="#666" style={styles.inputIcon} />
-          <TextInput placeholder="Username" style={styles.input} />
+          <TextInput
+            placeholder="Username"
+            style={styles.input}
+            value={username}
+            onChangeText={setUsername}
+          />
         </View>
 
         <View style={styles.inputContainer}>
           <MaterialIcons name="email" size={24} color="#666" style={styles.inputIcon} />
-          <TextInput placeholder="Email" style={styles.input} keyboardType="email-address" />
+          <TextInput
+            placeholder="Email"
+            style={styles.input}
+            keyboardType="email-address"
+            value={email}
+            onChangeText={setEmail}
+          />
         </View>
 
         <View style={styles.inputContainer}>
           <MaterialIcons name="lock" size={24} color="#666" style={styles.inputIcon} />
-          <TextInput 
-            placeholder="Password" 
-            style={styles.input} 
-            secureTextEntry 
+          <TextInput
+            placeholder="Password"
+            style={styles.input}
+            secureTextEntry
             value={password}
             onChangeText={setPassword}
           />
@@ -60,10 +105,10 @@ export default function SignUp({ navigation }) {
 
         <View style={styles.inputContainer}>
           <MaterialIcons name="lock" size={24} color="#666" style={styles.inputIcon} />
-          <TextInput 
-            placeholder="Confirm Password" 
-            style={styles.input} 
-            secureTextEntry 
+          <TextInput
+            placeholder="Confirm Password"
+            style={styles.input}
+            secureTextEntry
             value={confirmPassword}
             onChangeText={setConfirmPassword}
           />
@@ -71,19 +116,8 @@ export default function SignUp({ navigation }) {
 
         {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
-        <View style={styles.optionsContainer}>
-          <View style={styles.rememberMeContainer}>
-            <Switch
-              value={acceptTerms}
-              onValueChange={(value) => setAcceptTerms(value)}
-              thumbColor={acceptTerms ? "#008080" : "#ccc"}
-            />
-            <Text style={styles.rememberMeText}>I accept the terms and conditions</Text>
-          </View>
-        </View>
-
         <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
-          <Text style={styles.signUpButtonText} onPress={() => navigation.navigate("Home")}>Sign Up</Text>
+          <Text style={styles.signUpButtonText}>Sign Up</Text>
         </TouchableOpacity>
 
         <Text style={styles.signupText}>
@@ -112,7 +146,7 @@ export default function SignUp({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgba(217, 191, 241, 0.69)",
+    backgroundColor: "rgba(34, 33, 33, 0.56)",
   },
   headerContainer: {
     width: "100%",
@@ -162,7 +196,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 10,
     paddingHorizontal: 15,
-    backgroundColor: "rgba(208, 162, 235, 0.9)",
+    backgroundColor: "rgba(210, 206, 212, 0.99)",
     height: 50,
   },
   inputIcon: {

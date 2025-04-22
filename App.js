@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Animated } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // Sử dụng Ionicons cho icon
+import { Ionicons } from '@expo/vector-icons'; 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -11,7 +11,17 @@ import CategoryScreen from './screens/CategoryScreen';
 import BooksByCategory from './screens/BooksByCategory';
 import BooksByAuthors from './screens/BooksByAuthors';
 import DetailScreen from './screens/DetailScreen';
-
+import SearchScreen from './screens/SearchScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import AuthorList from './screens/AuthorList';
+import FavoriteList from './screens/FavoriteList';  
+import FollowedAuthors from './screens/FollowedAuthors';
+import HistoryScreen from './screens/HistoryScreen';
+import UserProfileScreen from './screens/UserProfileScreen';
+import PostStory from './screens/PostStory';
+import AddStoryScreen from './screens/AddStoryScreen';
+import StoryDetailScreen from './screens/StoryDetailScreen';
+import ChapterDetailScreen from './screens/ChapterDetailScreen';
 const Stack = createStackNavigator();
 
 // Component để bao bọc các màn hình có bottom menu
@@ -65,8 +75,7 @@ const ScreenWithBottomMenu = ({ navigation, children }) => {
               styles.menuItem,
               activeMenu === menu && styles.activeMenuItem,
               { transform: [{ scale }] }, // Áp dụng hiệu ứng phóng to
-            ]}
-          >
+            ]}>
             <TouchableOpacity
               style={styles.menuButton}
               onPressIn={handlePressIn} // Khi nhấn vào, phóng to
@@ -96,7 +105,7 @@ export default function App() {
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
-        
+
         {/* Bọc HomeScreen và CategoryScreen với ScreenWithBottomMenu */}
         <Stack.Screen 
           name="Home" 
@@ -106,7 +115,7 @@ export default function App() {
             </ScreenWithBottomMenu>
           )}
         />
-        
+
         <Stack.Screen 
           name="Category" 
           component={(props) => (
@@ -115,9 +124,34 @@ export default function App() {
             </ScreenWithBottomMenu>
           )}
         />
+        <Stack.Screen 
+          name="Search" 
+          component={(props) => (
+            <ScreenWithBottomMenu {...props}>
+              <SearchScreen />
+            </ScreenWithBottomMenu>
+          )}
+        />
+        <Stack.Screen 
+          name="Profile" 
+          component={(props) => (
+            <ScreenWithBottomMenu {...props}>
+              <ProfileScreen />
+            </ScreenWithBottomMenu>
+          )}
+        />
         <Stack.Screen name="BooksByCategory" component={BooksByCategory} />
         <Stack.Screen name="BooksByAuthors" component={BooksByAuthors} />
         <Stack.Screen name="Detail" component={DetailScreen} />
+        <Stack.Screen name='AuthorList' component={AuthorList} />
+        <Stack.Screen name='FavoriteList' component={FavoriteList} />
+        <Stack.Screen name='FollowedAuthors' component={FollowedAuthors}/>
+        <Stack.Screen name='HistoryScreen' component={HistoryScreen}/>
+        <Stack.Screen name='UserProfileScreen' component={UserProfileScreen}/>
+        <Stack.Screen name='PostStory' component={PostStory} />
+        <Stack.Screen name='AddStoryScreen' component={AddStoryScreen} />
+        <Stack.Screen name='StoryDetailScreen' component={StoryDetailScreen} />
+        <Stack.Screen name='ChapterDetailScreen' component={ChapterDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

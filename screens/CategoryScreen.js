@@ -42,7 +42,7 @@ const CategoryScreen = () => {
   };
 
   if (loading) {
-    return <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />;
+    return <ActivityIndicator size="large" color="#6200ee" style={styles.loading} />;
   }
 
   return (
@@ -60,7 +60,7 @@ const CategoryScreen = () => {
             </TouchableOpacity>
           ))
         ) : (
-          <Text style={styles.noCategories}>No categories available.</Text> // Hiển thị nếu không có thể loại
+          <Text style={styles.noCategories}>Không có thể loại nào.</Text> // Hiển thị nếu không có thể loại
         )}
       </ScrollView>
     </View>
@@ -71,32 +71,41 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 20,
+    paddingTop: 20,
+    paddingHorizontal: 15,
   },
   title: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 20,
+    color: '#333',
+    textAlign: 'center',
   },
   categoryList: {
-    marginBottom: 20,
+    marginTop: 10,
   },
   categoryContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
+    paddingBottom: 20,
   },
   categoryButton: {
-    backgroundColor: '#f0f0f0',
-    paddingVertical: 10,
+    backgroundColor: '#007bff',
+    paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,
-    marginBottom: 10,
-    marginRight: 10,
+    marginBottom: 15,
+    marginHorizontal: 10,
+    width: '45%', 
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   categoryText: {
-    fontSize: 14,
+    fontSize: 16,
+    color: '#fff',
     textAlign: 'center',
+    fontWeight: '500',
   },
   noCategories: {
     fontSize: 16,

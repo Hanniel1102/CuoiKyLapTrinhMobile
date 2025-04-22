@@ -1,0 +1,841 @@
+{
+    "novels": [
+      {
+        "ID": 1,
+        "title": "Mắt Biếc",
+        "authors": ["Nguyễn Nhật Ánh"],
+        "categories": ["Romance", "Drama"],
+        "description": "Một câu chuyện tình yêu đầy cảm động giữa hai người bạn từ thuở nhỏ. Mối tình ngọt ngào và buồn bã trong những ngày hè tuổi trẻ.",
+        "link_thumbnail": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1691147319i/11273677.jpg",
+        "language": "Vietnamese",
+        "country": "Vietnam",
+        "visibility": "public",
+        "view_count": 2500,
+        "published_year": 1990,
+        "publisher": "NXB Trẻ",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Quê Nhà",
+            "content": "Lê Bình nhớ về những ngày thơ ấu tại quê nhà với những ký ức sâu sắc về mảnh đất đã nuôi dưỡng anh."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Mối Tình Đầu",
+            "content": "Bình và Lan yêu nhau, nhưng vì hoàn cảnh khó khăn, họ phải chia tay. Mối tình đầu đẹp nhưng ngắn ngủi."
+          },
+          {
+            "chapter_id": 3,
+            "title": "Chương 3: Hồi Ức Mất Mát",
+            "content": "Bình trở về quê hương sau nhiều năm xa cách. Anh tìm lại những gì đã mất, những kỷ niệm tuổi thơ ngọt ngào."
+          }
+        ]
+      },
+      {
+        "ID": 2,
+        "title": "Nhà Giả Kim",
+        "authors": ["Paulo Coelho"],
+        "categories": ["Philosophy", "Adventure"],
+        "description": "Câu chuyện về một chàng chăn cừu và hành trình theo đuổi kho báu của mình, khám phá những bí ẩn của cuộc sống.",
+        "link_thumbnail": "https://nxbhcm.com.vn/Image/Biasach/nhagiakimTB2020.jpg",
+        "language": "Vietnamese",
+        "country": "Brazil",
+        "visibility": "public",
+        "view_count": 3200,
+        "published_year": 1988,
+        "publisher": "HarperOne",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Cuộc Hành Trình",
+            "content": "Santiago quyết định rời bỏ cuộc sống yên bình để đi tìm kho báu ở Ai Cập."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Chàng Chăn Cừu",
+            "content": "Trên hành trình, Santiago gặp nhiều người khác nhau, mỗi người đều dạy anh những bài học quan trọng."
+          },
+          {
+            "chapter_id": 3,
+            "title": "Chương 3: Kho Báu Bị Lãng Quên",
+            "content": "Khi Santiago sắp đạt được kho báu của mình, anh nhận ra rằng kho báu thực sự là những trải nghiệm quý giá."
+          }
+        ]
+      },
+      {
+        "ID": 3,
+        "title": "Đồi Gió Hú",
+        "authors": ["Emily Brontë"],
+        "categories": ["Classic", "Romance"],
+        "description": "Câu chuyện về tình yêu khắc khoải giữa Heathcliff và Catherine trên vùng đồi hoang vu của Yorkshire.",
+        "link_thumbnail": "https://bizweb.dktcdn.net/thumb/large/100/363/455/products/doigiohunew-a4012b76-331d-4659-a944-95e367f95e73.jpg?v=1712631100530",
+        "language": "English",
+        "country": "England",
+        "visibility": "public",
+        "view_count": 1800,
+        "published_year": 1847,
+        "publisher": "Thomas Cautley Newby",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Lần Gặp Gỡ Đầu Tiên",
+            "content": "Catherine gặp Heathcliff lần đầu tại nhà của gia đình Earnshaw."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Tình Yêu Khắc Khoải",
+            "content": "Tình yêu giữa Heathcliff và Catherine phát triển mạnh mẽ nhưng lại bị chia cách."
+          },
+          {
+            "chapter_id": 3,
+            "title": "Chương 3: Bi Kịch và Mất Mát",
+            "content": "Tình yêu giữa Catherine và Heathcliff không thể hoàn thiện, đầy đau khổ và mất mát."
+          }
+        ]
+      },
+      {
+        "ID": 4,
+        "title": "Tôi Thấy Hoa Vàng Trên Cỏ Xanh",
+        "authors": ["Nguyễn Nhật Ánh"],
+        "categories": ["Literature", "Short Stories"],
+        "description": "Câu chuyện về những con người trong cuộc sống đầy khó khăn nhưng vẫn nỗ lực sống với niềm tin vào cái đẹp và sự sống.",
+        "link_thumbnail": "https://upload.wikimedia.org/wikipedia/vi/thumb/3/3d/T%C3%B4i_th%E1%BA%A5y_hoa_v%C3%A0ng_tr%C3%An_c%E1%BB%8F_xanh.jpg/220px-T%C3%B4i_th%E1%BA%A5y_hoa_v%C3%A0ng_tr%C3%An_c%E1%BB%8F_xanh.jpg",
+        "language": "Vietnamese",
+        "country": "Vietnam",
+        "visibility": "public",
+        "view_count": 2200,
+        "published_year": 2004,
+        "publisher": "NXB Trẻ",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Cánh Đồng Cỏ",
+            "content": "Câu chuyện mở đầu với hình ảnh một cánh đồng cỏ xanh rợp mát, nơi những người dân sống đơn giản."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Những Ngày Khó Khăn",
+            "content": "Những con người ở đây vẫn tiếp tục sống với những khó khăn và thử thách, nhưng họ luôn tìm thấy niềm tin vào cuộc sống."
+          },
+          {
+            "chapter_id": 3,
+            "title": "Chương 3: Niềm Tin vào Sự Sống",
+            "content": "Dù có nhiều thử thách, nhân vật trong truyện vẫn luôn tin rằng cuộc sống vẫn đẹp và đáng sống."
+          }
+        ]
+      },
+      {
+        "ID": 5,
+        "title": "Cho Tôi Xin Một Vé Về Tuổi Thơ",
+        "authors": ["Nguyễn Nhật Ánh"],
+        "categories": ["Memoir", "Youth"],
+        "description": "Câu chuyện về những kỷ niệm đẹp thời thơ ấu, về tình bạn và những ký ức không thể quên.",
+        "link_thumbnail": "https://upload.wikimedia.org/wikipedia/vi/thumb/c/c9/Cho_t%C3%B4i_xin_m%E1%BB%99t_v%C3%A9_%C4%91i_tu%E1%BB%95i_th%C6%A1.jpg/250px-Cho_t%C3%B4i_xin_m%E1%BB%99t_v%C3%A9_%C4%91i_tu%E1%BB%95i_th%C6%A1.jpg",
+        "language": "Vietnamese",
+        "country": "Vietnam",
+        "visibility": "public",
+        "view_count": 3000,
+        "published_year": 2014,
+        "publisher": "NXB Trẻ",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Quê Hương",
+            "content": "Cuộc sống tuổi thơ của nhân vật chính, những kỷ niệm đáng nhớ về quê hương."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Những Người Bạn",
+            "content": "Tình bạn trong sáng và những trận cười khúc khích với những người bạn thân thiết."
+          },
+          {
+            "chapter_id": 3,
+            "title": "Chương 3: Hành Trình Trở Về",
+            "content": "Nhân vật chính quyết định quay trở về tuổi thơ, tìm lại những gì đã mất."
+          }
+        ]
+      },
+      {
+        "ID": 6,
+        "title": "Cô Gái Đến Từ Hôm Qua",
+        "authors": ["Nguyễn Nhật Ánh"],
+        "categories": ["Romance", "Youth"],
+        "description": "Mối tình ngây thơ và ngọt ngào giữa cậu bé và cô gái lạ, để lại những dấu ấn đẹp đẽ về tuổi học trò.",
+        "link_thumbnail": "https://bookfun.vn/wp-content/uploads/2024/11/trich-dan-nhung-cau-noi-hay-trong-co-gai-den-tu-hom-qua.jpg.webp",
+        "language": "Vietnamese",
+        "country": "Vietnam",
+        "visibility": "public",
+        "view_count": 2200,
+        "published_year": 1998,
+        "publisher": "NXB Trẻ",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Ngày Xưa Có Một Cô Gái",
+            "content": "Câu chuyện bắt đầu với sự xuất hiện của cô gái bí ẩn trong lớp học của cậu bé."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Mối Quan Hệ Đầu Tiên",
+            "content": "Cảm xúc đầu đời của cậu bé dành cho cô gái ấy, những cảm xúc mà lần đầu tiên anh trải nghiệm."
+          },
+          {
+            "chapter_id": 3,
+            "title": "Chương 3: Lối Đi Mới",
+            "content": "Mối quan hệ giữa họ trở nên sâu sắc hơn, và những thử thách của tuổi trẻ bắt đầu xuất hiện."
+          }
+        ]
+      },
+      {
+        "ID": 7,
+        "title": "Nhật Ký Trong Tù",
+        "authors": ["Hồ Chí Minh"],
+        "categories": ["Poetry", "Memoir"],
+        "description": "Nhật Ký Trong Tù là tập thơ của Chủ tịch Hồ Chí Minh, ghi lại những suy tư và cảm nhận của ông trong những năm tháng bị giam cầm tại Trung Quốc.",
+        "link_thumbnail": "https://file3.qdnd.vn/data/images/0/2023/05/12/hoanghoang/a.jpg?dpi=150&quality=100&w=870",
+        "language": "Vietnamese",
+        "country": "Vietnam",
+        "visibility": "public",
+        "view_count": 3500,
+        "published_year": 1943,
+        "publisher": "NXB Sự Thật",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Những Ngày Đầu",
+            "content": "Những cảm xúc và suy nghĩ của Hồ Chí Minh trong những ngày đầu bị giam cầm."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Sự Mất Mát và Hy Vọng",
+            "content": "Chủ tịch Hồ Chí Minh thể hiện sự kiên cường và hy vọng dù bị giam giữ trong hoàn cảnh khắc nghiệt."
+          }
+        ]
+      },
+      {
+        "ID": 8,
+        "title": "Harry Potter",
+        "authors": ["J.K. Rowling"],
+        "categories": ["Fantasy", "Adventure"],
+        "description": "Câu chuyện kỳ diệu về Harry Potter, một cậu bé phù thủy, trong cuộc chiến chống lại chúa tể hắc ám Voldemort.",
+        "link_thumbnail": "https://sachngoaingugiare.com/wp-content/uploads/2021/09/harry-potter-and-the-sorcerers-stone.jpeg",
+        "language": "English",
+        "country": "UK",
+        "visibility": "public",
+        "view_count": 15000,
+        "published_year": 1997,
+        "publisher": "Bloomsbury",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Một Cậu Bé Phù Thủy",
+            "content": "Harry Potter, một cậu bé mồ côi, phát hiện mình là một phù thủy và bắt đầu hành trình học tại trường Hogwarts."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Bí Mật về Phòng Cấm",
+            "content": "Harry và những người bạn khám phá ra nhiều bí mật tại trường Hogwarts, đặc biệt là về phòng cấm và những nguy hiểm mà nó ẩn chứa."
+          }
+        ]
+      },
+      {
+        "ID": 9,
+        "title": "Chúa Tể Những Chiếc Nhẫn",
+        "authors": ["J.R.R. Tolkien"],
+        "categories": ["Fantasy", "Adventure"],
+        "description": "Cuộc phiêu lưu của Frodo Baggins và những người bạn trong hành trình tiêu diệt chiếc nhẫn ma thuật.",
+        "link_thumbnail": "https://iguov8nhvyobj.vcdn.cloud/media/catalog/product/cache/1/image/c5f0a1eff4c394a251036189ccddaacd/l/o/lotr1_-_vnese_poster_1_.jpg",
+        "language": "English",
+        "country": "UK",
+        "visibility": "public",
+        "view_count": 10000,
+        "published_year": 1954,
+        "publisher": "Allen & Unwin",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Frodo Baggins và Chiếc Nhẫn",
+            "content": "Frodo Baggins nhận được nhiệm vụ nguy hiểm để phá hủy chiếc nhẫn ma thuật và ngăn chặn thế lực hắc ám."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Cuộc Hành Trình của Những Người Bạn",
+            "content": "Frodo và các bạn đồng hành của mình bắt đầu hành trình vượt qua các thử thách và kẻ thù nguy hiểm."
+          }
+        ]
+      },
+      {
+        "ID": 10,
+        "title": "Tam Quốc Diễn Nghĩa",
+        "authors": ["La Quán Trung"],
+        "categories": ["Historical", "Drama"],
+        "description": "Một tác phẩm lịch sử nổi tiếng của Trung Quốc kể về các cuộc chiến tranh giữa ba vương quốc trong thời kỳ Tam Quốc.",
+        "link_thumbnail": "https://salt.tikicdn.com/cache/750x750/ts/product/4f/05/5d/21d3c12f2989ebc98c4b9ec80313ccb6.jpg.webp",
+        "language": "Vietnamese",
+        "country": "China",
+        "visibility": "public",
+        "view_count": 5000,
+        "published_year": "1400s",
+        "publisher": "NXB Văn Học",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Trận Xích Bích",
+            "content": "Các chiến binh của ba vương quốc đối đầu tại trận chiến nổi tiếng Xích Bích."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Mưu Lược và Sự Tham Vọng",
+            "content": "Sự đấu tranh và mưu lược của các nhân vật chính trong cuộc chiến tranh tranh giành quyền lực."
+          }
+        ]
+      },
+      {
+        "ID": 11,
+        "title": "Thủy Hử",
+        "authors": ["Thi Nại Am"],
+        "categories": ["Historical", "Drama"],
+        "description": "Tác phẩm nổi tiếng kể về 108 anh hùng hảo hán trong phong trào khởi nghĩa chống lại chính quyền nhà Tống.",
+        "link_thumbnail": "https://lib.dangnho.com/wp-content/uploads/2020/03/thuy-hu-tap-1.gif",
+        "language": "Vietnamese",
+        "country": "China",
+        "visibility": "public",
+        "view_count": 4200,
+        "published_year": "1300s",
+        "publisher": "NXB Văn Học",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: 108 Anh Hùng",
+            "content": "Sự nổi lên của các anh hùng hảo hán trong phong trào khởi nghĩa."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Cuộc Khởi Nghĩa Tại Lương Sơn Bạc",
+            "content": "Các anh hùng tụ tập tại Lương Sơn Bạc để chuẩn bị cho cuộc chiến chống lại chính quyền nhà Tống."
+          }
+        ]
+      },
+      {
+        "ID": 12,
+        "title": "Tây Du Ký",
+        "authors": ["Ngô Thừa Ân"],
+        "categories": ["Fantasy", "Adventure"],
+        "description": "Cuộc hành trình của Đường Tăng và ba đồ đệ trên con đường đi thỉnh kinh, đối mặt với nhiều thử thách kỳ bí và ma quái.",
+        "link_thumbnail": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1630661276i/58916611.jpg",
+        "language": "Chinese",
+        "country": "China",
+        "visibility": "public",
+        "view_count": 8000,
+        "published_year": "1590s",
+        "publisher": "NXB Văn Học",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Đường Tăng và Ba Đồ Đệ",
+            "content": "Đường Tăng và các đồ đệ của ông bắt đầu hành trình đi thỉnh kinh từ Trung Quốc sang Ấn Độ."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Cuộc Gặp Gỡ với Ngọc Hoàng",
+            "content": "Đường Tăng và ba đồ đệ đối mặt với những thử thách khó khăn từ ma quái và các thế lực đen tối."
+          }
+        ]
+      },
+      {
+        "ID": 13,
+        "title": "Dế Mèn Phiêu Lưu Ký",
+        "authors": ["Tô Hoài"],
+        "categories": ["Adventure", "Children"],
+        "description": "Câu chuyện về Dế Mèn, một con dế nhỏ, và cuộc hành trình phiêu lưu của nó trong thế giới của những loài vật.",
+        "link_thumbnail": "https://muasachhay.vn/wp-content/uploads/2016/06/sach-de-men-phieu-luu-ky-mua-sach-hay.jpg",
+        "language": "Vietnamese",
+        "country": "Vietnam",
+        "visibility": "public",
+        "view_count": 5000,
+        "published_year": 1941,
+        "publisher": "NXB Kim Đồng",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Cuộc Gặp Gỡ",
+            "content": "Dế Mèn gặp gỡ Dế Trũi và bắt đầu cuộc hành trình của mình, học hỏi về sự dũng cảm và sức mạnh của tình bạn."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Cuộc Phiêu Lưu",
+            "content": "Dế Mèn và các bạn bắt đầu cuộc phiêu lưu khám phá thế giới xung quanh, vượt qua những thử thách và khám phá những điều mới mẻ."
+          }
+        ]
+      },
+      {
+        "ID": 14,
+        "title": "Don Quixote",
+        "authors": ["Miguel de Cervantes"],
+        "categories": ["Adventure", "Classics"],
+        "description": "Câu chuyện về một quý tộc điên rồ, Don Quixote, và người bạn đồng hành Sancho Panza trong cuộc hành trình chiến đấu với những cối xay gió.",
+        "link_thumbnail": "https://bookfun.vn/wp-content/uploads/2024/09/don-ki-ho-te-1.jpg.webp",
+        "language": "Spanish",
+        "country": "Spain",
+        "visibility": "public",
+        "view_count": 8000,
+        "published_year": 1605,
+        "publisher": "Francisco de Robles",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Don Quixote và Sancho Panza",
+            "content": "Don Quixote quyết định trở thành một hiệp sĩ và bắt đầu cuộc hành trình với người bạn trung thành, Sancho Panza."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Cuộc Chiến Với Cối Xay Gió",
+            "content": "Don Quixote chiến đấu với những cối xay gió mà anh tưởng là những quái vật khổng lồ, thể hiện sự dũng cảm và sự điên rồ của mình."
+          }
+        ]
+      },
+      {
+        "ID": 15,
+        "title": "Conan",
+        "authors": ["Gosho Aoyama"],
+        "categories": ["Mystery", "Adventure"],
+        "description": "Câu chuyện về một thiếu niên thám tử, Shinichi Kudo, bị hạ độc và trở thành một đứa trẻ, lấy tên là Conan Edogawa, tiếp tục giải quyết các vụ án.",
+        "link_thumbnail": "https://m.media-amazon.com/images/M/MV5BNGNjMjVmODYtMGMzZi00MWUyLTk1ZDQtYzI2ZTk2MmYzYTZiXkEyXkFqcGc@._V1_.jpg",
+        "language": "Japanese",
+        "country": "Japan",
+        "visibility": "public",
+        "view_count": 12000,
+        "published_year": 1994,
+        "publisher": "Shogakukan",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Vụ Án Bí Ẩn",
+            "content": "Shinichi Kudo, một thám tử tài ba, bị hạ độc và biến thành Conan, tiếp tục giải quyết các vụ án với trí tuệ sắc bén."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Bí Mật Về Viên Thuốc",
+            "content": "Conan bắt đầu tìm hiểu về viên thuốc gây hạ độc, với hy vọng sẽ tìm được cách để khôi phục lại hình dạng ban đầu của mình."
+          }
+        ]
+      },
+      {
+        "ID": 16,
+        "title": "Doraemon",
+        "authors": ["Fujiko F. Fujio"],
+        "categories": ["Science Fiction", "Adventure"],
+        "description": "Câu chuyện về một chú mèo máy đến từ tương lai, Doraemon, cùng với cậu bé Nobita trong những cuộc phiêu lưu kỳ diệu với các món đồ công nghệ từ tương lai.",
+        "link_thumbnail": "https://mcdn.coolmate.me/image/October2023/nhan-vat-doraemon-3012_329.jpg",
+        "language": "Japanese",
+        "country": "Japan",
+        "visibility": "public",
+        "view_count": 15000,
+        "published_year": 1969,
+        "publisher": "Shogakukan",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Doraemon và Nobita",
+            "content": "Doraemon, chú mèo máy từ tương lai, đến giúp Nobita vượt qua những khó khăn trong cuộc sống hàng ngày."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Các Món Đồ Kỳ Diệu",
+            "content": "Doraemon sử dụng các món đồ công nghệ từ tương lai để giúp Nobita giải quyết các vấn đề nhưng đôi khi lại gây ra những tình huống dở khóc dở cười."
+          }
+        ]
+      },
+      {
+        "ID": 17,
+        "title": "Totto-chan Bên Ô Cửa Sổ",
+        "authors": ["Tetsuko Kuroyanagi"],
+        "categories": ["Memoir", "Children"],
+        "description": "Cuốn sách kể về tuổi thơ của tác giả, đặc biệt là những trải nghiệm học tập và tình bạn tại một trường học đặc biệt ở Nhật Bản.",
+        "link_thumbnail": "https://upload.wikimedia.org/wikipedia/vi/thumb/f/fb/Totto-chan_b%C3%AAn_c%E1%BB%ADa_s%E1%BB%95_%28s%C3%A1ch%29.jpg/200px-Totto-chan_b%C3%AAn_c%E1%BB%ADa_s%E1%BB%95_%28s%C3%A1ch%29.jpg",
+        "language": "Japanese",
+        "country": "Japan",
+        "visibility": "public",
+        "view_count": 5000,
+        "published_year": 1981,
+        "publisher": "PHP Institute",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Cô Bé Totto-chan",
+            "content": "Totto-chan là một cô bé nghịch ngợm và luôn tò mò về mọi thứ, cô bé được nhận vào học tại một trường học đặc biệt."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Những Người Bạn",
+            "content": "Totto-chan kết bạn với các bạn học, cùng nhau trải qua những bài học quý giá và những tình bạn đẹp đẽ."
+          }
+        ]
+      },
+      {
+        "ID": 18,
+        "title": "Sợi Chỉ Đỏ",
+        "authors": ["Nhiều tác giả"],
+        "categories": ["Romance", "Fantasy"],
+        "description": "Câu chuyện về sợi chỉ đỏ nối kết những người yêu nhau, bất chấp thời gian và không gian, tạo nên một mối liên kết tình yêu vô hình nhưng mạnh mẽ.",
+        "link_thumbnail": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1616259699i/57470671.jpg",
+        "language": "Vietnamese",
+        "country": "Vietnam",
+        "visibility": "public",
+        "view_count": 4000,
+        "published_year": 2020,
+        "publisher": "NXB Văn Học",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Khởi Đầu Tình Yêu",
+            "content": "Sợi chỉ đỏ bắt đầu từ những cuộc gặp gỡ tình cờ, nơi mà hai người bắt đầu nhận ra mối liên kết kỳ diệu giữa họ."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Thử Thách Tình Cảm",
+            "content": "Dù đối mặt với những thử thách, mối quan hệ giữa hai người vẫn phát triển và trở nên sâu sắc hơn."
+          }
+        ]
+      },
+      {
+        "ID": 19,
+        "title": "Ma Đạo Tổ Sư",
+        "authors": ["Mặc Hương Đồng Khứu"],
+        "categories": ["Fantasy", "Adventure", "Romance"],
+        "description": "Câu chuyện về Ma Đạo Tổ Sư, với các cuộc phiêu lưu đầy kịch tính và mối tình đầy bi thương giữa hai nhân vật chính, cùng những tranh đấu trong thế giới tu tiên.",
+        "link_thumbnail": "https://upload.wikimedia.org/wikipedia/vi/thumb/0/00/Ma_%C4%91%E1%BA%A1o_t%E1%BB%95_s%C6%B0_quy%E1%BB%83n_1_2016.jpg/250px-Ma_%C4%91%E1%BA%A1o_t%E1%BB%95_s%C6%B0_quy%E1%BB%83n_1_2016.jpg",
+        "language": "Vietnamese",
+        "country": "China",
+        "visibility": "public",
+        "view_count": 7000,
+        "published_year": 2015,
+        "publisher": "NXB Văn Học",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Gặp Gỡ Mới",
+            "content": "Vân Mộng và Diệp Tử gặp gỡ trong hoàn cảnh khó khăn, bắt đầu mối quan hệ đầy sóng gió."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Tình Cảm Nảy Nở",
+            "content": "Mối tình giữa Vân Mộng và Diệp Tử phát triển trong quá trình đối đầu với những thế lực tà ác."
+          }
+        ]
+      },
+      {
+        "ID": 20,
+        "title": "Hệ Thống Tự Cứu Của Nhân Vật Phản Diện",
+        "authors": ["Mo Xiang Tong Xiu"],
+        "categories": ["Fantasy", "Action", "Adventure"],
+        "description": "Câu chuyện kể về nhân vật phản diện trong thế giới tu tiên, với hệ thống tự cứu giúp anh ta quay lại con đường chính nghĩa, nhưng liệu có thể thắng được số phận?",
+        "link_thumbnail": "https://cdn1.fahasa.com/media/catalog/product/b/i/bia-mem_hethong_tap-3.jpg",
+        "language": "Vietnamese",
+        "country": "China",
+        "visibility": "public",
+        "view_count": 6500,
+        "published_year": 2019,
+        "publisher": "NXB Sách Mới",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Nhân Vật Phản Diện",
+            "content": "Nhân vật chính, bị giam cầm trong thân phận phản diện, nhận được cơ hội từ hệ thống để sửa chữa sai lầm."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Cuộc Đấu Tranh Với Số Phận",
+            "content": "Nhân vật chính phải chiến đấu với những thử thách và kẻ thù trong một thế giới đầy sự nguy hiểm."
+          }
+        ]
+      },
+      {
+        "ID": 21,
+        "title": "Thiên Quan Tứ Phúc",
+        "authors": ["Mặc Hương Đồng Khứu"],
+        "categories": ["Fantasy", "Adventure", "Romance"],
+        "description": "Cuốn sách kể về hành trình của một thiếu niên trong thế giới huyền bí, với sự kết hợp giữa tình yêu và các yếu tố tu tiên, ma pháp đầy kỳ ảo.",
+        "link_thumbnail": "https://nhasachphuongnam.com/images/thumbnails/435/537/detailed/293/thien-quan-tu-phuc-tap-1-truyen-tranh.jpg",
+        "language": "Vietnamese",
+        "country": "China",
+        "visibility": "public",
+        "view_count": 6000,
+        "published_year": 2020,
+        "publisher": "NXB Văn Học",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Tình Yêu và Ma Pháp",
+            "content": "Nhân vật chính bước vào thế giới huyền bí, nơi những ma pháp kỳ diệu và tình yêu lạ thường tồn tại."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Bí Mật Thế Giới Tối Tăm",
+            "content": "Một bí mật về thế giới tu tiên dần được hé lộ, đưa nhân vật chính vào những cuộc phiêu lưu nguy hiểm."
+          }
+        ]
+      },
+      {
+        "ID": 22,
+        "title": "Mai Táng Tuổi 18",
+        "authors": ["Tân Di Ổ"],
+        "categories": ["Drama", "Romance"],
+        "description": "Câu chuyện của những người trẻ, khám phá những thăng trầm trong cuộc sống và tình yêu ở độ tuổi 18, khi mỗi quyết định có thể thay đổi tương lai.",
+        "link_thumbnail": "https://img.wattpad.com/cover/368062752-288-k426191.jpg",
+        "language": "Vietnamese",
+        "country": "China",
+        "visibility": "public",
+        "view_count": 5500,
+        "published_year": 2018,
+        "publisher": "NXB Thanh Niên",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Tuổi 18",
+            "content": "Những giấc mơ, nỗi buồn và hy vọng của nhân vật chính trong những năm tháng tuổi trẻ."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Tình Yêu và Lửa Khát Khao",
+            "content": "Mối tình đầu của nhân vật chính bắt đầu, với những cảm xúc mãnh liệt và những thử thách gian nan."
+          }
+        ]
+      },
+      {
+        "ID": 23,
+        "title": "Kính Vạn Hoa",
+        "authors": ["Nguyễn Nhật Ánh"],
+        "categories": ["Youth", "Literature"],
+        "description": "Cuốn sách là một câu chuyện đầy cảm xúc về tình bạn, tình yêu và sự trưởng thành của lứa tuổi học trò.",
+        "link_thumbnail": "https://product.hstatic.net/200000343865/product/kinh-van-hoa_con-ma-con-ma_ban-dien-anh_bia_f7f51c8c9f6e4f2b947b977f80e34352_master.jpg",
+        "language": "Vietnamese",
+        "country": "Vietnam",
+        "visibility": "public",
+        "view_count": 7000,
+        "published_year": 1999,
+        "publisher": "NXB Trẻ",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Những Người Bạn Cũ",
+            "content": "Những kỷ niệm tuổi học trò, tình bạn trong sáng và những trải nghiệm đầu đời của nhân vật chính."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Tình Bạn và Tình Yêu",
+            "content": "Tình bạn và tình yêu bắt đầu hòa quyện vào nhau, tạo nên những thử thách mới trong cuộc sống của nhân vật."
+          }
+        ]
+      },
+      {
+        "ID": 24,
+        "title": "Thượng Ẩn",
+        "authors": ["Tống Ngọc Liên"],
+        "categories": ["Romance", "Drama"],
+        "description": "Câu chuyện tình yêu đầy cảm động giữa hai chàng trai, khám phá tình cảm và những rào cản trong xã hội.",
+        "link_thumbnail": "https://skyline6002.wordpress.com/wp-content/uploads/2016/02/69b8264egw1f0z31hrel1j21kw2t3wuu.jpg",
+        "language": "Vietnamese",
+        "country": "China",
+        "visibility": "public",
+        "view_count": 8000,
+        "published_year": 2020,
+        "publisher": "NXB Trẻ",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Gặp Gỡ Mới",
+            "content": "Hai chàng trai gặp gỡ trong một tình huống đầy bất ngờ, bắt đầu một tình yêu ngọt ngào nhưng đầy thử thách."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Những Rào Cản Xã Hội",
+            "content": "Tình yêu giữa họ bị cản trở bởi những rào cản xã hội và những định kiến trong cộng đồng."
+          }
+        ]
+      },
+      {
+        "ID": 25,
+        "title": "Ngày Xưa Có Một Chuyện Tình",
+        "authors": ["Nguyễn Nhật Ánh"],
+        "categories": ["Romance", "Drama"],
+        "description": "Câu chuyện tình yêu đẹp và buồn giữa hai nhân vật trong một mối tình đầy kỷ niệm và đau thương.",
+        "link_thumbnail": "https://bizweb.dktcdn.net/100/180/408/files/ngay-xua-co-mot-chuyen-tinh.jpg?v=1725704766536",
+        "language": "Vietnamese",
+        "country": "Vietnam",
+        "visibility": "public",
+        "view_count": 6000,
+        "published_year": 2017,
+        "publisher": "NXB Trẻ",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Mối Tình Đầu",
+            "content": "Mối tình đầu tiên trong sáng, ngọt ngào của nhân vật chính với người yêu đầu đời."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Những Kỷ Niệm Xưa",
+            "content": "Nhân vật chính trở lại những kỷ niệm xưa với người yêu cũ, những hồi ức về một thời thanh xuân tươi đẹp."
+          }
+        ]
+      },
+      {
+        "ID": 26,
+        "title": "Ngồi Khóc Trên Cây",
+        "authors": ["Nguyễn Nhật Ánh"],
+        "categories": ["Literature", "Drama"],
+        "description": "Câu chuyện của những con người trong xã hội đương đại, phải đối mặt với những nỗi buồn và khổ đau trong cuộc sống.",
+        "link_thumbnail": "https://www.nxbtre.com.vn/Images/Book/nxbtre_full_29102017_091049.jpg",
+        "language": "Vietnamese",
+        "country": "Vietnam",
+        "visibility": "public",
+        "view_count": 5500,
+        "published_year": 2004,
+        "publisher": "NXB Trẻ",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Những Ngày Buồn",
+            "content": "Nhân vật chính trong câu chuyện phải đối mặt với những ngày tháng đầy đau khổ, và cảm giác cô đơn tràn ngập trong lòng."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Tìm Lại Niềm Tin",
+            "content": "Nhân vật chính bắt đầu tìm kiếm lại niềm tin vào cuộc sống, và những người bạn mới xuất hiện trong đời."
+          }
+        ]
+      },
+      {
+        "ID": 27,
+        "title": "Chú Chó Nhỏ Mang Giỏ Hoa Hồng",
+        "authors": ["Tô Hoài"],
+        "categories": ["Children", "Fantasy"],
+        "description": "Một câu chuyện ngắn về một chú chó nhỏ mang giỏ hoa hồng và hành trình đi tìm chủ nhân của mình.",
+        "link_thumbnail": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1454949850i/28961874.jpg",
+        "language": "Vietnamese",
+        "country": "Vietnam",
+        "visibility": "public",
+        "view_count": 4800,
+        "published_year": 1985,
+        "publisher": "NXB Kim Đồng",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Chuyến Hành Trình",
+            "content": "Chú chó nhỏ bắt đầu hành trình tìm kiếm chủ nhân và những giỏ hoa hồng đặc biệt."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Những Người Bạn Đồng Hành",
+            "content": "Trong hành trình của mình, chú chó nhỏ gặp gỡ và kết bạn với nhiều người tốt bụng."
+          }
+        ]
+      },
+      {
+        "ID": 28,
+        "title": "Rừng Nauy",
+        "authors": ["Haruki Murakami"],
+        "categories": ["Drama", "Romance"],
+        "description": "Câu chuyện tình yêu đầy đau khổ và phức tạp của nhân vật chính với những người xung quanh trong bối cảnh Nhật Bản những năm 1960.",
+        "link_thumbnail": "https://upload.wikimedia.org/wikipedia/vi/thumb/2/28/Norwegian-wood_poster.jpg/220px-Norwegian-wood_poster.jpg",
+        "language": "Vietnamese",
+        "country": "Japan",
+        "visibility": "public",
+        "view_count": 10000,
+        "published_year": 1987,
+        "publisher": "Nhà Xuất Bản Hội Nhà Văn",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Những Cái Nhìn Cũ",
+            "content": "Nhân vật chính nhìn lại những mối quan hệ tình cảm và tình bạn đã đi qua trong cuộc sống."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Tình Yêu và Những Mối Quan Hệ",
+            "content": "Những thử thách trong tình yêu và những mối quan hệ phức tạp trong cuộc sống của nhân vật chính."
+          }
+        ]
+      },
+      {
+        "ID": 29,
+        "title": "Moshi Moshi",
+        "authors": ["Hiromi Kawakami"],
+        "categories": ["Drama", "Romance"],
+        "description": "Câu chuyện về một người phụ nữ gặp lại người yêu cũ sau nhiều năm và những kỷ niệm tình yêu trở lại.",
+        "link_thumbnail": "https://cdn.kobo.com/book-images/136b459d-a157-4ae7-b8f5-bc40fa0d62d3/353/569/90/False/moshi-moshi-8.jpg",
+        "language": "Japanese",
+        "country": "Japan",
+        "visibility": "public",
+        "view_count": 6500,
+        "published_year": 2007,
+        "publisher": "Nhà Xuất Bản Đọc",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Gặp Lại Người Cũ",
+            "content": "Một cuộc gặp gỡ tình cờ với người yêu cũ và những cảm xúc trong quá khứ dần trở lại."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Những Cảm Xúc Đã Quên",
+            "content": "Nhân vật chính bắt đầu nhận ra những cảm xúc chưa từng mất đi đối với người yêu cũ."
+          }
+        ]
+      },
+      {
+        "ID": 30,
+        "title": "Botchan",
+        "authors": ["Natsume Sōseki"],
+        "categories": ["Literature", "Humor"],
+        "description": "Botchan là một câu chuyện hài hước về một chàng trai trẻ từ Tokyo chuyển đến một thị trấn nhỏ làm giáo viên và gặp phải nhiều tình huống dở khóc dở cười.",
+        "link_thumbnail": "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lydh277cwd5tec@resize_w450_nl.webp",
+        "language": "Japanese",
+        "country": "Japan",
+        "visibility": "public",
+        "view_count": 7500,
+        "published_year": 1906,
+        "publisher": "Nhà Xuất Bản Shunjuusha",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Cuộc Sống Mới",
+            "content": "Botchan rời Tokyo và đến thị trấn nhỏ, bắt đầu công việc dạy học và gặp gỡ những nhân vật kỳ lạ."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Những Tình Huống Dở Khóc Dở Cười",
+            "content": "Botchan trải qua những tình huống khó xử và hài hước trong công việc và cuộc sống mới của mình."
+          }
+        ]
+      },
+      {
+        "ID": 31,
+        "title": "Kafka Trên Bờ Biển",
+        "authors": ["Haruki Murakami"],
+        "categories": ["Drama", "Fantasy"],
+        "description": "Kafka Trên Bờ Biển kể về câu chuyện của một thiếu niên chạy trốn khỏi gia đình và một người đàn ông lớn tuổi mang trong mình những bí ẩn kỳ lạ.",
+        "link_thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSfcdDndtYkOKgbMahyqmMIJz0oPCVKYlvU2SGEmxMRGnsTuD2j",
+        "language": "Vietnamese",
+        "country": "Japan",
+        "visibility": "public",
+        "view_count": 9200,
+        "published_year": 2002,
+        "publisher": "Nhà Xuất Bản Văn Học",
+        "chapters": [
+          {
+            "chapter_id": 1,
+            "title": "Chương 1: Kafka và Cuộc Chạy Trốn",
+            "content": "Kafka Tamura, một thiếu niên 15 tuổi, quyết định rời bỏ gia đình để bắt đầu hành trình tìm kiếm bản thân."
+          },
+          {
+            "chapter_id": 2,
+            "title": "Chương 2: Những Bí Ẩn Từ Quá Khứ",
+            "content": "Kafka bắt đầu khám phá những bí mật đen tối từ quá khứ của mình, trong khi gặp gỡ những nhân vật kỳ lạ trên hành trình của mình."
+          }
+        ]
+      }
+    ]
+  }
+  

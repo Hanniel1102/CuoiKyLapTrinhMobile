@@ -1,16 +1,35 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity,  Modal, TextInput, Button, Animated  } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, Modal, TextInput, Button, Animated, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'; // Icon mũi tên quay lại
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DetailScreen = ({ route, navigation }) => {
   const { book } = route.params; // Nhận thông tin sách từ tham số điều hướng
 
-  // State để lưu trữ tab hiện tại
   const [activeTab, setActiveTab] = useState('about'); // Mặc định hiển thị About
   const [modalVisible, setModalVisible] = useState(false); // Điều khiển modal
   const [reviewText, setReviewText] = useState(''); // Lưu trữ nội dung bình luận
+  const [isFavorite, setIsFavorite] = useState(false); // Trạng thái để kiểm tra xem sách đã được yêu thích chưa
   const [modalTranslateY] = useState(new Animated.Value(500)); // Start from below the screen
-  
+  const [username, setUsername] = useState(''); // Lưu tên người dùng
+
+  useEffect(() => {
+    // Lấy thông tin username từ AsyncStorage
+    const getUsername = async () => {
+      const storedUsername = await AsyncStorage.getItem('username');
+      setUsername(storedUsername); // Lưu username vào state
+
+      if (storedUsername) {
+        const storedFavorites = await AsyncStorage.getItem(`favoriteBooks_${storedUsername}`);
+        const favoriteBooks = storedFavorites ? JSON.parse(storedFavorites) : [];
+        const isBookFavorite = favoriteBooks.some(item => item.id === book.id); // Kiểm tra xem sách đã có trong yêu thích chưa
+        setIsFavorite(isBookFavorite); // Cập nhật trạng thái yêu thích
+      }
+    };
+
+    getUsername(); // Kiểm tra khi component được render
+  }, [book.id]); // Kiểm tra lại khi ID sách thay đổi
+
   // Hiệu ứng mở modal
   const openModal = () => {
     setModalVisible(true);
@@ -35,6 +54,37 @@ const DetailScreen = ({ route, navigation }) => {
     console.log("New Review: ", reviewText);
     setReviewText(''); // Reset nội dung bình luận
     closeModal(); // Đóng modal sau khi gửi
+  };
+
+  // Thêm vào yêu thích hoặc xóa khỏi yêu thích
+  const handleAddToFavorites = async () => {
+    try {
+      if (!username) {
+        Alert.alert('Thông báo', 'Bạn cần đăng nhập để thêm sách vào yêu thích.');
+        return;
+      }
+
+      // Lấy danh sách yêu thích từ AsyncStorage theo username
+      const storedFavorites = await AsyncStorage.getItem(`favoriteBooks_${username}`);
+      const favoriteBooks = storedFavorites ? JSON.parse(storedFavorites) : [];
+
+      if (isFavorite) {
+        // Nếu sách đã yêu thích, xóa nó khỏi danh sách yêu thích
+        const updatedFavorites = favoriteBooks.filter(item => item.id !== book.id);
+        await AsyncStorage.setItem(`favoriteBooks_${username}`, JSON.stringify(updatedFavorites));
+        setIsFavorite(false); // Đánh dấu sách đã bị bỏ khỏi danh sách yêu thích
+        Alert.alert('Thành công', 'Sách đã được bỏ khỏi danh sách yêu thích.');
+      } else {
+        // Nếu sách chưa yêu thích, thêm vào danh sách yêu thích
+        favoriteBooks.push(book);
+        await AsyncStorage.setItem(`favoriteBooks_${username}`, JSON.stringify(favoriteBooks));
+        setIsFavorite(true); // Đánh dấu sách đã được thêm vào danh sách yêu thích
+        Alert.alert('Thành công', 'Sách đã được thêm vào danh sách yêu thích.');
+      }
+    } catch (error) {
+      console.error('Lỗi khi thao tác với yêu thích:', error);
+      Alert.alert('Lỗi', 'Đã có lỗi xảy ra khi thao tác với yêu thích.');
+    }
   };
 
   const renderTabContent = () => {
@@ -63,8 +113,7 @@ const DetailScreen = ({ route, navigation }) => {
       default:
         return <Text style={styles.description}>{book.volumeInfo.description || "No description available."}</Text>;
     }
-  };
-
+  }; 
 
   return (
     <ScrollView style={styles.container}>
@@ -86,6 +135,16 @@ const DetailScreen = ({ route, navigation }) => {
         </View>
       </View>
 
+      {/* Button thêm vào danh sách yêu thích */}
+      <TouchableOpacity
+        style={[styles.favoriteButton, isFavorite && styles.favoriteButtonActive]}
+        onPress={handleAddToFavorites}
+      >
+        <Text style={styles.favoriteButtonText}>
+          {isFavorite ? 'Bỏ khỏi Yêu Thích' : 'Thêm vào Yêu Thích'}
+        </Text>
+      </TouchableOpacity>
+
       {/* Tab Bar */}
       <View style={styles.tabContainer}>
         <TouchableOpacity style={[styles.tab, activeTab === 'about' && styles.activeTab]} onPress={() => setActiveTab('about')}>
@@ -101,6 +160,7 @@ const DetailScreen = ({ route, navigation }) => {
 
       {/* Tab Content */}
       {renderTabContent()}
+
       {/* Modal để thêm bình luận */}
       <Modal
         animationType="slide"
@@ -171,10 +231,19 @@ const styles = StyleSheet.create({
     color: '#bbb',
     marginBottom: 5,
   },
-  bookRating: {
+  favoriteButton: {
+    marginTop: 20,
+    padding: 12,
+    backgroundColor: '#ddd',
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  favoriteButtonActive: {
+    backgroundColor: '#FF6347', // Màu đỏ khi đã thêm vào yêu thích
+  },
+  favoriteButtonText: {
+    color: '#fff',
     fontSize: 16,
-    color: '#FFD700', // Màu vàng cho đánh giá
-    marginTop: 5,
   },
   tabContainer: {
     flexDirection: 'row',
@@ -199,57 +268,27 @@ const styles = StyleSheet.create({
   activeTabText: {
     color: '#FF6347', // Màu chữ cho tab đang hoạt động
   },
-  sectionTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 20,
-    marginBottom: 10,
-    color: '#333',
-  },
-  description: {
-    fontSize: 16,
-    color: '#555',
-    lineHeight: 22,
-    marginBottom: 15,
-  },
-  chapterList: {
-    marginBottom: 15,
-  },
-  chapterItem: {
-    backgroundColor: '#f8f8f8',
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 10,
-    elevation: 2,
-  },
-  chapterText: {
-    fontSize: 16,
-    color: '#333',
-  },
-  reviews: {
-    marginBottom: 20,
-  },
-  reviewText: {
-    fontSize: 16,
-    color: '#333',
-    marginBottom: 10,
-  },
   addReviewButton: {
-    backgroundColor: '#FF6347',
-    paddingVertical: 10,
+    marginTop: 20,
+    paddingVertical: 12,
     paddingHorizontal: 20,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginTop: 10,
+    backgroundColor: '#4CAF50', // Màu nền cho nút
+    borderRadius: 8, // Bo góc cho nút
+    alignItems: 'center', // Canh giữa nội dung
+    justifyContent: 'center', // Canh giữa nội dung
+    width: '50%', // Chiều rộng của nút
+    alignSelf: 'center', // Canh giữa nút theo chiều ngang
   },
+  
   addReviewButtonText: {
-    color: '#fff',
-    fontSize: 16,
+    color: '#fff', // Màu chữ trắng
+    fontSize: 16, // Kích thước chữ
+    fontWeight: 'bold', // Đậm chữ
   },
   modalOverlay: {
     flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
     backgroundColor: '#fff',
