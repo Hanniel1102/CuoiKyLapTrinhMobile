@@ -9,7 +9,7 @@ import SignUpScreen from './screens/SignUpScreen';
 import HomeScreen from './screens/HomeScreen';
 import CategoryScreen from './screens/CategoryScreen';
 import BooksByCategory from './screens/BooksByCategory';
-import BooksByAuthors from './screens/BooksByAuthors';
+import Authors from './screens/AuthorsScreen';
 import DetailScreen from './screens/DetailScreen';
 import SearchScreen from './screens/SearchScreen';
 import ProfileScreen from './screens/ProfileScreen';
@@ -141,7 +141,7 @@ export default function App() {
           )}
         />
         <Stack.Screen name="BooksByCategory" component={BooksByCategory} />
-        <Stack.Screen name="BooksByAuthors" component={BooksByAuthors} />
+        <Stack.Screen name="BooksByAuthors" component={Authors} />
         <Stack.Screen name="Detail" component={DetailScreen} />
         <Stack.Screen name='AuthorList' component={AuthorList} />
         <Stack.Screen name='FavoriteList' component={FavoriteList} />

@@ -3,7 +3,13 @@
       {
         "ID": 1,
         "title": "Mắt Biếc",
-        "authors": ["Nguyễn Nhật Ánh"],
+        "authors": [
+          {
+            "name" : "Nguyễn Nhật Ánh",
+            "birth": "7 tháng 5, 1955",
+            "pic": "https://www.nxbtre.com.vn/Images/Writer/nxbtre_thumb_30552016_085555.jpg"
+          }
+        ],
         "categories": ["Romance", "Drama"],
         "description": "Một câu chuyện tình yêu đầy cảm động giữa hai người bạn từ thuở nhỏ. Mối tình ngọt ngào và buồn bã trong những ngày hè tuổi trẻ.",
         "link_thumbnail": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1691147319i/11273677.jpg",
@@ -34,7 +40,13 @@
       {
         "ID": 2,
         "title": "Nhà Giả Kim",
-        "authors": ["Paulo Coelho"],
+        "authors": [
+          {
+            "name" : "Paulo Coelho",
+            "birth": "24 tháng 8, 1947",
+            "pic": "https://bizweb.dktcdn.net/100/363/455/articles/a-nh-chu-p-ma-n-hi-nh-2023-10-13-lu-c-16-25-54.png?v=1697189172777"
+          }
+        ],
         "categories": ["Philosophy", "Adventure"],
         "description": "Câu chuyện về một chàng chăn cừu và hành trình theo đuổi kho báu của mình, khám phá những bí ẩn của cuộc sống.",
         "link_thumbnail": "https://nxbhcm.com.vn/Image/Biasach/nhagiakimTB2020.jpg",
@@ -65,7 +77,13 @@
       {
         "ID": 3,
         "title": "Đồi Gió Hú",
-        "authors": ["Emily Brontë"],
+        "authors": [
+          {
+            "name" : "Emily Brontë",
+            "birth": "30 tháng 7, 1818",
+            "pic": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Emily_Bront%C3%AB_by_Patrick_Branwell_Bront%C3%AB_restored.jpg"
+          }
+        ],
         "categories": ["Classic", "Romance"],
         "description": "Câu chuyện về tình yêu khắc khoải giữa Heathcliff và Catherine trên vùng đồi hoang vu của Yorkshire.",
         "link_thumbnail": "https://bizweb.dktcdn.net/thumb/large/100/363/455/products/doigiohunew-a4012b76-331d-4659-a944-95e367f95e73.jpg?v=1712631100530",
@@ -96,7 +114,13 @@
       {
         "ID": 4,
         "title": "Tôi Thấy Hoa Vàng Trên Cỏ Xanh",
-        "authors": ["Nguyễn Nhật Ánh"],
+        "authors": [
+          {
+            "name" : "Nguyễn Nhật Ánh",
+            "birth": "7 tháng 5, 1955",
+            "pic": "https://www.nxbtre.com.vn/Images/Writer/nxbtre_thumb_30552016_085555.jpg"
+          }
+        ],
         "categories": ["Literature", "Short Stories"],
         "description": "Câu chuyện về những con người trong cuộc sống đầy khó khăn nhưng vẫn nỗ lực sống với niềm tin vào cái đẹp và sự sống.",
         "link_thumbnail": "https://upload.wikimedia.org/wikipedia/vi/thumb/3/3d/T%C3%B4i_th%E1%BA%A5y_hoa_v%C3%A0ng_tr%C3%An_c%E1%BB%8F_xanh.jpg/220px-T%C3%B4i_th%E1%BA%A5y_hoa_v%C3%A0ng_tr%C3%An_c%E1%BB%8F_xanh.jpg",
@@ -127,7 +151,13 @@
       {
         "ID": 5,
         "title": "Cho Tôi Xin Một Vé Về Tuổi Thơ",
-        "authors": ["Nguyễn Nhật Ánh"],
+        "authors": [
+          {
+            "name" : "Nguyễn Nhật Ánh",
+            "birth": "7 tháng 5, 1955",
+            "pic": "https://www.nxbtre.com.vn/Images/Writer/nxbtre_thumb_30552016_085555.jpg"
+          }
+        ],
         "categories": ["Memoir", "Youth"],
         "description": "Câu chuyện về những kỷ niệm đẹp thời thơ ấu, về tình bạn và những ký ức không thể quên.",
         "link_thumbnail": "https://upload.wikimedia.org/wikipedia/vi/thumb/c/c9/Cho_t%C3%B4i_xin_m%E1%BB%99t_v%C3%A9_%C4%91i_tu%E1%BB%95i_th%C6%A1.jpg/250px-Cho_t%C3%B4i_xin_m%E1%BB%99t_v%C3%A9_%C4%91i_tu%E1%BB%95i_th%C6%A1.jpg",
@@ -158,7 +188,13 @@
       {
         "ID": 6,
         "title": "Cô Gái Đến Từ Hôm Qua",
-        "authors": ["Nguyễn Nhật Ánh"],
+        "authors": [
+          {
+            "name" : "Nguyễn Nhật Ánh",
+            "birth": "7 tháng 5, 1955",
+            "pic": "https://www.nxbtre.com.vn/Images/Writer/nxbtre_thumb_30552016_085555.jpg"
+          }
+        ],
         "categories": ["Romance", "Youth"],
         "description": "Mối tình ngây thơ và ngọt ngào giữa cậu bé và cô gái lạ, để lại những dấu ấn đẹp đẽ về tuổi học trò.",
         "link_thumbnail": "https://bookfun.vn/wp-content/uploads/2024/11/trich-dan-nhung-cau-noi-hay-trong-co-gai-den-tu-hom-qua.jpg.webp",
@@ -189,14 +225,18 @@
       {
         "ID": 7,
         "title": "Nhật Ký Trong Tù",
-        "authors": ["Hồ Chí Minh"],
+        "authors": [{
+          "name": "Hồ Chí Minh",
+          "birth": "19 tháng 5, 1890",
+          "pic": "https://tulieuvankien.dangcongsan.vn/Uploads/2019/4/5/16/Ho%20Chi%20Minh.jpg"
+        }],
         "categories": ["Poetry", "Memoir"],
         "description": "Nhật Ký Trong Tù là tập thơ của Chủ tịch Hồ Chí Minh, ghi lại những suy tư và cảm nhận của ông trong những năm tháng bị giam cầm tại Trung Quốc.",
         "link_thumbnail": "https://file3.qdnd.vn/data/images/0/2023/05/12/hoanghoang/a.jpg?dpi=150&quality=100&w=870",
         "language": "Vietnamese",
         "country": "Vietnam",
         "visibility": "public",
-        "view_count": 3500,
+        "view_count": 35000000,
         "published_year": 1943,
         "publisher": "NXB Sự Thật",
         "chapters": [
@@ -215,7 +255,11 @@
       {
         "ID": 8,
         "title": "Harry Potter",
-        "authors": ["J.K. Rowling"],
+        "authors": [{
+          "name": "J.K. Rowling",
+          "birth": "31 tháng 7, 1965",
+          "pic": "https://scontent.fhan1-1.fna.fbcdn.net/v/t39.30808-6/301731419_607268380763610_2118740818247516203_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=IX3hV_EbCTYQ7kNvwGO30Io&_nc_oc=AdmxOHcJjZZjXJBVKGbIs0HFNn0NM1r9zmryGpABTYijAcq2khuHVK7nr9Z108wje0o&_nc_zt=23&_nc_ht=scontent.fhan1-1.fna&_nc_gid=_urNwKEQBsj2emSKH4jdbg&oh=00_AfFpEZk4gRxU-TOeBOTPGzcstKKPJNcKgX_ZhX8Ppu8tIA&oe=680E6FF1"
+        }],
         "categories": ["Fantasy", "Adventure"],
         "description": "Câu chuyện kỳ diệu về Harry Potter, một cậu bé phù thủy, trong cuộc chiến chống lại chúa tể hắc ám Voldemort.",
         "link_thumbnail": "https://sachngoaingugiare.com/wp-content/uploads/2021/09/harry-potter-and-the-sorcerers-stone.jpeg",
@@ -241,7 +285,11 @@
       {
         "ID": 9,
         "title": "Chúa Tể Những Chiếc Nhẫn",
-        "authors": ["J.R.R. Tolkien"],
+        "authors": [{
+          "name": "J.R.R. Tolkien",
+          "birth": "3 tháng 1, 1892",
+          "pic": "https://upload.wikimedia.org/wikipedia/commons/d/d4/J._R._R._Tolkien%2C_ca._1925.jpg"
+        }],
         "categories": ["Fantasy", "Adventure"],
         "description": "Cuộc phiêu lưu của Frodo Baggins và những người bạn trong hành trình tiêu diệt chiếc nhẫn ma thuật.",
         "link_thumbnail": "https://iguov8nhvyobj.vcdn.cloud/media/catalog/product/cache/1/image/c5f0a1eff4c394a251036189ccddaacd/l/o/lotr1_-_vnese_poster_1_.jpg",
@@ -267,7 +315,11 @@
       {
         "ID": 10,
         "title": "Tam Quốc Diễn Nghĩa",
-        "authors": ["La Quán Trung"],
+        "authors": [{
+          "name": "La Quán Trung",
+          "birth": "1330",
+          "pic": "https://vanhoavaphattrien.vn/uploads/images/2023/05/27/b1-la-quan-trung-1685178452.jpg"
+        }],
         "categories": ["Historical", "Drama"],
         "description": "Một tác phẩm lịch sử nổi tiếng của Trung Quốc kể về các cuộc chiến tranh giữa ba vương quốc trong thời kỳ Tam Quốc.",
         "link_thumbnail": "https://salt.tikicdn.com/cache/750x750/ts/product/4f/05/5d/21d3c12f2989ebc98c4b9ec80313ccb6.jpg.webp",
@@ -293,7 +345,11 @@
       {
         "ID": 11,
         "title": "Thủy Hử",
-        "authors": ["Thi Nại Am"],
+        "authors": [{
+          "name": "Thi Nại Am",
+          "birth": "1290",
+          "pic": "https://cafefcdn.com/203337114487263232/2024/5/6/uat-tri-17149696365361027453226-1715000681970-1715000682265129404037.jpg"
+        }],
         "categories": ["Historical", "Drama"],
         "description": "Tác phẩm nổi tiếng kể về 108 anh hùng hảo hán trong phong trào khởi nghĩa chống lại chính quyền nhà Tống.",
         "link_thumbnail": "https://lib.dangnho.com/wp-content/uploads/2020/03/thuy-hu-tap-1.gif",
@@ -319,7 +375,11 @@
       {
         "ID": 12,
         "title": "Tây Du Ký",
-        "authors": ["Ngô Thừa Ân"],
+        "authors": [{
+          "name": "Ngô Thừa Ân",
+          "birth": "1506",
+          "pic": "https://photo.znews.vn/w480/Uploaded/oplukaa/2020_02_27/WuChengen.jpg"
+        }],
         "categories": ["Fantasy", "Adventure"],
         "description": "Cuộc hành trình của Đường Tăng và ba đồ đệ trên con đường đi thỉnh kinh, đối mặt với nhiều thử thách kỳ bí và ma quái.",
         "link_thumbnail": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1630661276i/58916611.jpg",
@@ -345,7 +405,11 @@
       {
         "ID": 13,
         "title": "Dế Mèn Phiêu Lưu Ký",
-        "authors": ["Tô Hoài"],
+        "authors": [{
+          "name": "Tô Hoài",
+          "birth": "September 27, 1920",
+          "pic": "https://upload.wikimedia.org/wikipedia/commons/f/fb/To_Hoai.jpg"
+        }],
         "categories": ["Adventure", "Children"],
         "description": "Câu chuyện về Dế Mèn, một con dế nhỏ, và cuộc hành trình phiêu lưu của nó trong thế giới của những loài vật.",
         "link_thumbnail": "https://muasachhay.vn/wp-content/uploads/2016/06/sach-de-men-phieu-luu-ky-mua-sach-hay.jpg",
@@ -371,7 +435,11 @@
       {
         "ID": 14,
         "title": "Don Quixote",
-        "authors": ["Miguel de Cervantes"],
+        "authors": [{
+          "name": "Miguel de Cervantes",
+          "birth": "29 tháng 9, 1547",
+          "pic": "https://upload.wikimedia.org/wikipedia/commons/0/09/Cervantes_J%C3%A1uregui.jpg"
+        }],
         "categories": ["Adventure", "Classics"],
         "description": "Câu chuyện về một quý tộc điên rồ, Don Quixote, và người bạn đồng hành Sancho Panza trong cuộc hành trình chiến đấu với những cối xay gió.",
         "link_thumbnail": "https://bookfun.vn/wp-content/uploads/2024/09/don-ki-ho-te-1.jpg.webp",
@@ -397,7 +465,11 @@
       {
         "ID": 15,
         "title": "Conan",
-        "authors": ["Gosho Aoyama"],
+        "authors": [{
+            "name" : "Gosho Aoyama",
+            "birth": "21 tháng 6, 1963 ",
+            "pic": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Gosho_Aoyama.jpg"
+        }],
         "categories": ["Mystery", "Adventure"],
         "description": "Câu chuyện về một thiếu niên thám tử, Shinichi Kudo, bị hạ độc và trở thành một đứa trẻ, lấy tên là Conan Edogawa, tiếp tục giải quyết các vụ án.",
         "link_thumbnail": "https://m.media-amazon.com/images/M/MV5BNGNjMjVmODYtMGMzZi00MWUyLTk1ZDQtYzI2ZTk2MmYzYTZiXkEyXkFqcGc@._V1_.jpg",
@@ -423,7 +495,13 @@
       {
         "ID": 16,
         "title": "Doraemon",
-        "authors": ["Fujiko F. Fujio"],
+        "authors": [
+          {
+            "name" : "Fujiko F. Fujio",
+            "birth": "1 tháng 12 năm 1933",
+            "pic": "https://static.wikia.nocookie.net/dorepedia/images/4/4e/Img_fujiko.jpg/revision/latest?cb=20131012133632&path-prefix=vi"
+          }
+        ],
         "categories": ["Science Fiction", "Adventure"],
         "description": "Câu chuyện về một chú mèo máy đến từ tương lai, Doraemon, cùng với cậu bé Nobita trong những cuộc phiêu lưu kỳ diệu với các món đồ công nghệ từ tương lai.",
         "link_thumbnail": "https://mcdn.coolmate.me/image/October2023/nhan-vat-doraemon-3012_329.jpg",
@@ -449,7 +527,13 @@
       {
         "ID": 17,
         "title": "Totto-chan Bên Ô Cửa Sổ",
-        "authors": ["Tetsuko Kuroyanagi"],
+        "authors": [
+          {
+            "name" : "Tetsuko Kuroyanagi",
+            "birth": "9 tháng 8, 1933",
+            "pic": "https://japannews.yomiuri.co.jp/wp-content/uploads/2023/09/Kuroyanagi.jpg"
+          }
+        ],
         "categories": ["Memoir", "Children"],
         "description": "Cuốn sách kể về tuổi thơ của tác giả, đặc biệt là những trải nghiệm học tập và tình bạn tại một trường học đặc biệt ở Nhật Bản.",
         "link_thumbnail": "https://upload.wikimedia.org/wikipedia/vi/thumb/f/fb/Totto-chan_b%C3%AAn_c%E1%BB%ADa_s%E1%BB%95_%28s%C3%A1ch%29.jpg/200px-Totto-chan_b%C3%AAn_c%E1%BB%ADa_s%E1%BB%95_%28s%C3%A1ch%29.jpg",
@@ -475,7 +559,13 @@
       {
         "ID": 18,
         "title": "Sợi Chỉ Đỏ",
-        "authors": ["Nhiều tác giả"],
+        "authors": [
+          {
+            "name" : "Nhiều tác giả",
+            "birth": "",
+            "pic": ""
+          }
+        ],
         "categories": ["Romance", "Fantasy"],
         "description": "Câu chuyện về sợi chỉ đỏ nối kết những người yêu nhau, bất chấp thời gian và không gian, tạo nên một mối liên kết tình yêu vô hình nhưng mạnh mẽ.",
         "link_thumbnail": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1616259699i/57470671.jpg",
@@ -501,7 +591,13 @@
       {
         "ID": 19,
         "title": "Ma Đạo Tổ Sư",
-        "authors": ["Mặc Hương Đồng Khứu"],
+        "authors": [
+          {
+            "name" : "Mặc Hương Đồng Khứu",
+            "birth": "1994",
+            "pic": "https://i.pinimg.com/736x/83/8e/ed/838eed01b9ac52cb1532b3b334309739.jpg"
+          }
+        ],
         "categories": ["Fantasy", "Adventure", "Romance"],
         "description": "Câu chuyện về Ma Đạo Tổ Sư, với các cuộc phiêu lưu đầy kịch tính và mối tình đầy bi thương giữa hai nhân vật chính, cùng những tranh đấu trong thế giới tu tiên.",
         "link_thumbnail": "https://upload.wikimedia.org/wikipedia/vi/thumb/0/00/Ma_%C4%91%E1%BA%A1o_t%E1%BB%95_s%C6%B0_quy%E1%BB%83n_1_2016.jpg/250px-Ma_%C4%91%E1%BA%A1o_t%E1%BB%95_s%C6%B0_quy%E1%BB%83n_1_2016.jpg",
@@ -527,7 +623,13 @@
       {
         "ID": 20,
         "title": "Hệ Thống Tự Cứu Của Nhân Vật Phản Diện",
-        "authors": ["Mo Xiang Tong Xiu"],
+        "authors": [
+          {
+            "name" : "Mặc Hương Đồng Khứu",
+            "birth": "1994",
+            "pic": "https://i.pinimg.com/736x/83/8e/ed/838eed01b9ac52cb1532b3b334309739.jpg"
+          }
+        ],
         "categories": ["Fantasy", "Action", "Adventure"],
         "description": "Câu chuyện kể về nhân vật phản diện trong thế giới tu tiên, với hệ thống tự cứu giúp anh ta quay lại con đường chính nghĩa, nhưng liệu có thể thắng được số phận?",
         "link_thumbnail": "https://cdn1.fahasa.com/media/catalog/product/b/i/bia-mem_hethong_tap-3.jpg",
@@ -553,7 +655,13 @@
       {
         "ID": 21,
         "title": "Thiên Quan Tứ Phúc",
-        "authors": ["Mặc Hương Đồng Khứu"],
+        "authors": [
+          {
+            "name" : "Mặc Hương Đồng Khứu",
+            "birth": "1994",
+            "pic": "https://i.pinimg.com/736x/83/8e/ed/838eed01b9ac52cb1532b3b334309739.jpg"
+          }
+        ],
         "categories": ["Fantasy", "Adventure", "Romance"],
         "description": "Cuốn sách kể về hành trình của một thiếu niên trong thế giới huyền bí, với sự kết hợp giữa tình yêu và các yếu tố tu tiên, ma pháp đầy kỳ ảo.",
         "link_thumbnail": "https://nhasachphuongnam.com/images/thumbnails/435/537/detailed/293/thien-quan-tu-phuc-tap-1-truyen-tranh.jpg",
@@ -579,7 +687,13 @@
       {
         "ID": 22,
         "title": "Mai Táng Tuổi 18",
-        "authors": ["Tân Di Ổ"],
+        "authors": [
+          {
+            "name" : "Tân Di Ổ",
+            "birth": "9 tháng 8, 1981",
+            "pic": "https://revelogue.com/wp-content/uploads/2021/04/Tac-gia-Tan-Di-O-1-e1619064356154.jpg"
+          }
+        ],        
         "categories": ["Drama", "Romance"],
         "description": "Câu chuyện của những người trẻ, khám phá những thăng trầm trong cuộc sống và tình yêu ở độ tuổi 18, khi mỗi quyết định có thể thay đổi tương lai.",
         "link_thumbnail": "https://img.wattpad.com/cover/368062752-288-k426191.jpg",
@@ -605,7 +719,13 @@
       {
         "ID": 23,
         "title": "Kính Vạn Hoa",
-        "authors": ["Nguyễn Nhật Ánh"],
+        "authors": [
+          {
+            "name" : "Nguyễn Nhật Ánh",
+            "birth": "7 tháng 5, 1955",
+            "pic": "https://www.nxbtre.com.vn/Images/Writer/nxbtre_thumb_30552016_085555.jpg"
+          }
+        ],
         "categories": ["Youth", "Literature"],
         "description": "Cuốn sách là một câu chuyện đầy cảm xúc về tình bạn, tình yêu và sự trưởng thành của lứa tuổi học trò.",
         "link_thumbnail": "https://product.hstatic.net/200000343865/product/kinh-van-hoa_con-ma-con-ma_ban-dien-anh_bia_f7f51c8c9f6e4f2b947b977f80e34352_master.jpg",
@@ -631,7 +751,13 @@
       {
         "ID": 24,
         "title": "Thượng Ẩn",
-        "authors": ["Tống Ngọc Liên"],
+        "authors": [
+          {
+            "name" : "Tống Ngọc Lien",
+            "birth": "Không rõ",
+            "pic": ""
+          }
+        ],
         "categories": ["Romance", "Drama"],
         "description": "Câu chuyện tình yêu đầy cảm động giữa hai chàng trai, khám phá tình cảm và những rào cản trong xã hội.",
         "link_thumbnail": "https://skyline6002.wordpress.com/wp-content/uploads/2016/02/69b8264egw1f0z31hrel1j21kw2t3wuu.jpg",
@@ -657,7 +783,13 @@
       {
         "ID": 25,
         "title": "Ngày Xưa Có Một Chuyện Tình",
-        "authors": ["Nguyễn Nhật Ánh"],
+        "authors": [
+          {
+            "name" : "Nguyễn Nhật Ánh",
+            "birth": "7 tháng 5, 1955",
+            "pic": "https://www.nxbtre.com.vn/Images/Writer/nxbtre_thumb_30552016_085555.jpg"
+          }
+        ],
         "categories": ["Romance", "Drama"],
         "description": "Câu chuyện tình yêu đẹp và buồn giữa hai nhân vật trong một mối tình đầy kỷ niệm và đau thương.",
         "link_thumbnail": "https://bizweb.dktcdn.net/100/180/408/files/ngay-xua-co-mot-chuyen-tinh.jpg?v=1725704766536",
@@ -683,7 +815,13 @@
       {
         "ID": 26,
         "title": "Ngồi Khóc Trên Cây",
-        "authors": ["Nguyễn Nhật Ánh"],
+        "authors": [
+          {
+            "name" : "Nguyễn Nhật Ánh",
+            "birth": "7 tháng 5, 1955",
+            "pic": "https://www.nxbtre.com.vn/Images/Writer/nxbtre_thumb_30552016_085555.jpg"
+          }
+        ],
         "categories": ["Literature", "Drama"],
         "description": "Câu chuyện của những con người trong xã hội đương đại, phải đối mặt với những nỗi buồn và khổ đau trong cuộc sống.",
         "link_thumbnail": "https://www.nxbtre.com.vn/Images/Book/nxbtre_full_29102017_091049.jpg",
@@ -709,7 +847,13 @@
       {
         "ID": 27,
         "title": "Chú Chó Nhỏ Mang Giỏ Hoa Hồng",
-        "authors": ["Tô Hoài"],
+        "authors": [
+          {
+            "name" : "Nguyễn Nhật Ánh",
+            "birth": "7 tháng 5, 1955",
+            "pic": "https://www.nxbtre.com.vn/Images/Writer/nxbtre_thumb_30552016_085555.jpg"
+          }
+        ],
         "categories": ["Children", "Fantasy"],
         "description": "Một câu chuyện ngắn về một chú chó nhỏ mang giỏ hoa hồng và hành trình đi tìm chủ nhân của mình.",
         "link_thumbnail": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1454949850i/28961874.jpg",
@@ -735,7 +879,13 @@
       {
         "ID": 28,
         "title": "Rừng Nauy",
-        "authors": ["Haruki Murakami"],
+        "authors": [
+          {
+            "name": "Haruki Murakami",
+            "birth": "12 tháng 1, 1949",
+            "pic": "data:image/webp;base64,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"
+          }
+        ],
         "categories": ["Drama", "Romance"],
         "description": "Câu chuyện tình yêu đầy đau khổ và phức tạp của nhân vật chính với những người xung quanh trong bối cảnh Nhật Bản những năm 1960.",
         "link_thumbnail": "https://upload.wikimedia.org/wikipedia/vi/thumb/2/28/Norwegian-wood_poster.jpg/220px-Norwegian-wood_poster.jpg",
@@ -761,7 +911,11 @@
       {
         "ID": 29,
         "title": "Moshi Moshi",
-        "authors": ["Hiromi Kawakami"],
+        "authors": [{
+            "name": "Hiromi Kawakami",
+            "birth":"1 tháng 4, 1958",
+            "pic":"https://cassette.sphdigital.com.sg/image/straitstimes/b3589410cf3ce8f7f1aea8a96a084cef2cf89772695fc0af689513ed7cc8085a?w=860"
+        }],
         "categories": ["Drama", "Romance"],
         "description": "Câu chuyện về một người phụ nữ gặp lại người yêu cũ sau nhiều năm và những kỷ niệm tình yêu trở lại.",
         "link_thumbnail": "https://cdn.kobo.com/book-images/136b459d-a157-4ae7-b8f5-bc40fa0d62d3/353/569/90/False/moshi-moshi-8.jpg",
@@ -787,7 +941,11 @@
       {
         "ID": 30,
         "title": "Botchan",
-        "authors": ["Natsume Sōseki"],
+        "authors": [{
+          "name": "Natsume Sōseki",
+          "birth": "9 tháng 2, 1867",
+          "pic": "https://upload.wikimedia.org/wikipedia/commons/1/17/Natsume_Soseki_photo.jpg"
+        }],
         "categories": ["Literature", "Humor"],
         "description": "Botchan là một câu chuyện hài hước về một chàng trai trẻ từ Tokyo chuyển đến một thị trấn nhỏ làm giáo viên và gặp phải nhiều tình huống dở khóc dở cười.",
         "link_thumbnail": "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lydh277cwd5tec@resize_w450_nl.webp",
@@ -813,7 +971,13 @@
       {
         "ID": 31,
         "title": "Kafka Trên Bờ Biển",
-        "authors": ["Haruki Murakami"],
+        "authors": [
+          {
+            "name": "Haruki Murakami",
+            "birth": "12 tháng 1, 1949",
+            "pic": "data:image/webp;base64,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"
+          }
+        ],
         "categories": ["Drama", "Fantasy"],
         "description": "Kafka Trên Bờ Biển kể về câu chuyện của một thiếu niên chạy trốn khỏi gia đình và một người đàn ông lớn tuổi mang trong mình những bí ẩn kỳ lạ.",
         "link_thumbnail": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSfcdDndtYkOKgbMahyqmMIJz0oPCVKYlvU2SGEmxMRGnsTuD2j",

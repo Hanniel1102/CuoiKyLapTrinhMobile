@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, Modal, TextInput, Button, Animated, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image, Alert, Modal, TextInput, Button, Animated, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'; // Icon mũi tên quay lại
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -12,13 +12,14 @@ const DetailScreen = ({ route, navigation }) => {
   const [isFavorite, setIsFavorite] = useState(false); // Trạng thái để kiểm tra xem sách đã được yêu thích chưa
   const [modalTranslateY] = useState(new Animated.Value(500)); // Start from below the screen
   const [username, setUsername] = useState(''); // Lưu tên người dùng
-
+  const [reviews, setReviews] = useState([]);
+  
   useEffect(() => {
     // Lấy thông tin username từ AsyncStorage
     const getUsername = async () => {
       const storedUsername = await AsyncStorage.getItem('username');
       setUsername(storedUsername); // Lưu username vào state
-
+  
       if (storedUsername) {
         const storedFavorites = await AsyncStorage.getItem(`favoriteBooks_${storedUsername}`);
         const favoriteBooks = storedFavorites ? JSON.parse(storedFavorites) : [];
@@ -26,9 +27,21 @@ const DetailScreen = ({ route, navigation }) => {
         setIsFavorite(isBookFavorite); // Cập nhật trạng thái yêu thích
       }
     };
-
-    getUsername(); // Kiểm tra khi component được render
-  }, [book.id]); // Kiểm tra lại khi ID sách thay đổi
+  
+    const loadReviews = async () => {
+      try {
+        const stored = await AsyncStorage.getItem(`reviews_${book.title}`); // Lấy reviews của sách theo book.id
+        if (stored) {
+          setReviews(JSON.parse(stored)); // Cập nhật lại danh sách reviews cho sách hiện tại
+        }
+      } catch (error) {
+        console.error('Lỗi khi lấy review:', error);
+      }
+    };
+  
+    getUsername();
+    loadReviews();
+  }, [book.title]);; // Kiểm tra lại khi ID sách thay đổi
 
   // Hiệu ứng mở modal
   const openModal = () => {
@@ -50,10 +63,30 @@ const DetailScreen = ({ route, navigation }) => {
   };
 
   // Gửi bình luận (ở đây bạn có thể thêm chức năng gửi bình luận)
-  const handleAddReview = () => {
-    console.log("New Review: ", reviewText);
-    setReviewText(''); // Reset nội dung bình luận
-    closeModal(); // Đóng modal sau khi gửi
+  const handleAddReview = async () => {
+    if (reviewText.trim() === '') {
+      Alert.alert('Thông báo', 'Bạn chưa nhập nội dung đánh giá.');
+      return;
+    }
+  
+    const newReview = {
+      id: Date.now(),
+      bookTitle: book.title, // Lưu tên sách
+      user: username || 'Ẩn danh',
+      text: reviewText.trim(),
+    };
+  
+    const updatedReviews = [newReview, ...reviews];
+    setReviews(updatedReviews);
+    setReviewText(''); // Xóa nội dung sau khi thêm bình luận
+    closeModal();
+  
+    try {
+      // Lưu đánh giá cho sách với book.id duy nhất
+      await AsyncStorage.setItem(`reviews_${book.title}`, JSON.stringify(updatedReviews));
+    } catch (error) {
+      console.error('Lỗi khi lưu review:', error);
+    }
   };
 
   // Thêm vào yêu thích hoặc xóa khỏi yêu thích
@@ -87,6 +120,31 @@ const DetailScreen = ({ route, navigation }) => {
     }
   };
 
+  // Khi render bình luận, chỉ hiển thị các bình luận của sách hiện tại
+  const renderReviews = () => {
+    if (reviews.length === 0) {
+      return <Text style={styles.reviewText}>Chưa có đánh giá nào.</Text>;
+    }
+  
+    return (
+      <FlatList
+        data={reviews}
+        renderItem={({ item }) => (
+          <View style={styles.reviewItem}>
+            <Text style={styles.reviewText}><Text style={{ fontWeight: 'bold' }}>{item.user}: </Text>{item.text}</Text>
+          </View>
+        )}
+        keyExtractor={(item) => item.id.toString()} // Dùng ID của review làm key
+      />
+    );
+  };
+  
+
+   // Hàm để hiển thị chi tiết chương khi người dùng nhấn vào một chương
+   const handleChapterPress = (chapter) => {
+    navigation.navigate('ChapterDetailScreen', { chapter }); // Chuyển sang màn hình ChapterDetailScreen và truyền dữ liệu chapter
+  };
+
   const renderTabContent = () => {
     switch (activeTab) {
       case 'about':
@@ -94,9 +152,9 @@ const DetailScreen = ({ route, navigation }) => {
       case 'chapters':
         return (
           <View style={styles.chapterList}>
-            {book.chapter?.map((chapter, index) => (
-              <TouchableOpacity key={index} style={styles.chapterItem}>
-                <Text style={styles.chapterText}>{chapter}</Text>
+            {book.chapters?.map((chapter, index) => (
+              <TouchableOpacity key={index} style={styles.chapterItem} onPress={() => handleChapterPress(chapter)}>
+                <Text style={styles.chapterText}>{chapter.title}</Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -104,8 +162,8 @@ const DetailScreen = ({ route, navigation }) => {
       case 'reviews':
         return (
           <View style={styles.reviews}>
-            <Text style={styles.reviewText}>Review 1: This book is amazing!</Text>
-            <TouchableOpacity style={styles.addReviewButton} onPress={() => setModalVisible(true)}>
+            {renderReviews()}
+            <TouchableOpacity style={styles.addReviewButton} onPress={openModal}>
               <Text style={styles.addReviewButtonText}>+ Add Review</Text>
             </TouchableOpacity>
           </View>
@@ -129,9 +187,12 @@ const DetailScreen = ({ route, navigation }) => {
           style={styles.bookImage}
         />
         <View style={styles.bookInfo}>
-          <Text style={styles.bookTitle}>{book.title}</Text>
-          <Text style={styles.bookAuthor}>{book.authors?.join(', ') || 'Unknown Author'}</Text>
+        <Text style={styles.bookTitle}>{book.title}</Text>
+          <Text style={styles.bookAuthor}>
+            {book.authors?.map(author => author.name).join(', ') || 'Unknown Author'}
+          </Text>
           <Text style={styles.bookCategory}>{book.categories?.join(', ') || 'No Category'}</Text>
+          <Text style={styles.bookCategory}>{book.view_count || 'No View'}</Text>
         </View>
       </View>
 
@@ -267,6 +328,13 @@ const styles = StyleSheet.create({
   },
   activeTabText: {
     color: '#FF6347', // Màu chữ cho tab đang hoạt động
+  },
+  chapterItem: {
+    marginTop: 20,
+    padding: 12,
+    backgroundColor: '#ddd',
+    borderRadius: 8,
+    alignItems: 'center',
   },
   addReviewButton: {
     marginTop: 20,

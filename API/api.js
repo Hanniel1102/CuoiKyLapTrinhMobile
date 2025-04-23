@@ -19,28 +19,48 @@ export const fetchRecentHotBooks = async () => {
     const response = await axios.get(BASE_URL);
     const books = response.data || [];
     // Sắp xếp theo view_count giảm dần
-    return books.sort((a, b) => b.view_count - a.view_count).slice(0, 10);
+    return books.sort((a, b) => b.view_count - a.view_count); // Lấy 10 sách hot nhất
   } catch (error) {
     console.error('Lỗi khi lấy sách hot gần đây:', error);
     throw error;
   }
 };
 
-// Hàm để lấy danh sách tác giả
+// Hàm để lấy danh sách thông tin tác giả và loại bỏ các tác giả trùng tên
 export const fetchAuthors = async (books) => {
-  const authorsList = Array.from(
-    new Set(books.flatMap(book => book.authors || []))
+  const authorsList = books.flatMap(book => 
+    book.authors?.map(author => ({
+      name: author.name,
+      birth: author.birth,
+      pic: author.pic,
+    })) || []
   );
-  return authorsList;
+
+  // Dùng Map để loại bỏ các tác giả trùng tên
+  const uniqueAuthorsMap = new Map();
+  
+  authorsList.forEach(author => {
+    if (!uniqueAuthorsMap.has(author.name)) {
+      uniqueAuthorsMap.set(author.name, author); // Thêm tác giả vào Map nếu chưa có
+    }
+  });
+  
+  // Trả về danh sách các tác giả không trùng tên
+  return Array.from(uniqueAuthorsMap.values());
 };
 
+
 // Lấy sách theo tác giả
-export const fetchBooksByAuthors = async (authors) => {
+export const fetchBooksByAuthors = async (authorName) => {
   try {
     const response = await axios.get(BASE_URL);
     const books = response.data || [];
+    
+    // Lọc sách dựa trên tên tác giả
     return books.filter(book =>
-      book.authors?.some(a => a.toLowerCase().includes(authors.toLowerCase()))
+      book.authors?.some(author => 
+        author.name.toLowerCase().includes(authorName.toLowerCase()) // Kiểm tra tên tác giả có chứa từ khóa
+      )
     );
   } catch (error) {
     console.error('Lỗi khi lấy sách theo tác giả:', error.message);
@@ -78,27 +98,34 @@ export const fetchBooksByCategory = async (category) => {
 };
 
 // Hàm tìm kiếm theo tên truyện
-// export const fetchBooksByTitle = async (title) => {
-//   try {
-//     const encodedTitle = encodeURIComponent(title); // Mã hóa tên truyện
-//     // Nếu API hỗ trợ tìm kiếm theo query 'title'
-//     const response = await axios.get(`${BASE_URL}?title=${encodedTitle}`);
-//     return response.data || []; // Trả về danh sách sách
-//   } catch (error) {
-//     console.error('Lỗi khi lấy sách theo tên truyện:', error);
-//     throw error;
-//   }
-// };
+export const fetchBooksByTitle = async (title) => {
+  try {
+    // Gọi API để tìm sách theo tên truyện
+    const response = await axios.get(`${BASE_URL}`, {
+      params: { title: title } // Truyền tham số title vào URL
+    });
 
-// // Hàm tìm kiếm theo tác giả
-// export const fetchBooksByAuthor = async (author) => {
-//   try {
-//     const encodedAuthor = encodeURIComponent(author); // Mã hóa tên tác giả
-//     // Nếu API hỗ trợ tìm kiếm theo query 'inauthor'
-//     const response = await axios.get(`${BASE_URL}?authors=${encodedAuthor}`);
-//     return response.data || []; // Trả về danh sách sách
-//   } catch (error) {
-//     console.error('Lỗi khi lấy sách theo tác giả:', error);
-//     throw error;
-//   }
-// };
+    // Trả về danh sách sách nếu có kết quả
+    return response.data || [];
+  } catch (error) {
+    console.error('Lỗi khi lấy sách theo tên truyện:', error);
+    throw error;
+  }
+};
+
+
+// Hàm tìm kiếm tác giả
+export const fetchAuthor = async (authorName) => {
+  try {
+    // Gọi API để tìm tác giả
+    const response = await axios.get(`${BASE_URL}`, {
+      params: { authors: authorName } // Truyền tham số authors vào URL
+    });
+
+    // Trả về danh sách tác giả nếu có kết quả
+    return response.data || [];
+  } catch (error) {
+    console.error('Lỗi khi tìm tác giả:', error);
+    throw error;
+  }
+};

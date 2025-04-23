@@ -104,7 +104,7 @@ const HomeScreen = () => {
   const handleAuthorPress = async (author) => {
     setLoading(true); 
     try {
-      const booksByAuthor = await fetchBooksByAuthors(author); 
+      const booksByAuthor = await fetchBooksByAuthors(author.name); 
       setLoading(false);
       navigation.navigate('BooksByAuthors', { author, books: booksByAuthor });
     } catch (error) {
@@ -186,7 +186,7 @@ const HomeScreen = () => {
                   style={styles.author}
                   onPress={() => handleAuthorPress(author)} 
                 >
-                  <Text style={styles.authorName}>{author}</Text>
+                  <Text style={styles.authorName}>{author.name}</Text>
                 </TouchableOpacity>
               ))}
             </View>

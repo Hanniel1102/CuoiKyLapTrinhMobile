@@ -53,13 +53,13 @@ const AuthorList = ({ route, navigation }) => {
     try {
       if (followedAuthors.includes(author)) {
         // Nếu tác giả đã được theo dõi, xóa khỏi danh sách
-        const updatedFollowedAuthors = followedAuthors.filter(item => item !== author);
+        const updatedFollowedAuthors = followedAuthors.filter(item => item !== author.name);
         setFollowedAuthors(updatedFollowedAuthors);
         await AsyncStorage.setItem(`followedAuthors_${username}`, JSON.stringify(updatedFollowedAuthors));
-        Alert.alert('Đã bỏ theo dõi', `${author} đã được bỏ theo dõi.`);
+        Alert.alert('Đã bỏ theo dõi', `${author.name} đã được bỏ theo dõi.`);
       } else {
         // Nếu tác giả chưa được theo dõi, thêm vào danh sách
-        const updatedFollowedAuthors = [...followedAuthors, author];
+        const updatedFollowedAuthors = [...followedAuthors, author.name];
         setFollowedAuthors(updatedFollowedAuthors);
         await AsyncStorage.setItem(`followedAuthors_${username}`, JSON.stringify(updatedFollowedAuthors));
         Alert.alert('Thành công', `${author} đã được theo dõi.`);
@@ -80,13 +80,13 @@ const AuthorList = ({ route, navigation }) => {
         <ScrollView style={styles.authorList}>
           {authors.map((author, index) => (
             <View key={index} style={styles.authorItem}>
-              <Text style={styles.authorName}>{author}</Text>
+              <Text style={styles.authorName}>{author.name}</Text>
               <TouchableOpacity
-                style={[styles.followButton, followedAuthors.includes(author) && styles.followedButton]}
-                onPress={() => handleFollowAuthor(author)}
+                style={[styles.followButton, followedAuthors.includes(author.name) && styles.followedButton]}
+                onPress={() => handleFollowAuthor(author.name)}
               >
                 <Text style={styles.followButtonText}>
-                  {followedAuthors.includes(author) ? 'Bỏ theo dõi' : 'Theo dõi'}
+                  {followedAuthors.includes(author.name) ? 'Bỏ theo dõi' : 'Theo dõi'}
                 </Text>
               </TouchableOpacity>
             </View>
