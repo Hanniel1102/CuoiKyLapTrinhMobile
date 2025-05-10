@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
+import { Ionicons } from '@expo/vector-icons'; // hoặc FontAwesome, MaterialIcons,...
 
 const ProfileScreen = () => {
   const [username, setUsername] = useState('');
@@ -63,37 +64,42 @@ const ProfileScreen = () => {
         </Text>
       </TouchableOpacity>
       
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('FavoriteList')}
-      >
-        <Text style={styles.buttonText}>Thư Viện Yêu Thích</Text>
-      </TouchableOpacity>
+      <View style={styles.menu}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('FavoriteList')}>
+          <View style={styles.row}>
+            <Ionicons name="heart" size={20} color="#1F3C35" style={styles.icon} />
+            <Text style={styles.buttonText}>Thư Viện Yêu Thích</Text>
+          </View>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('FollowedAuthors')}
-      >
-        <Text style={styles.buttonText}>Danh Sách Tác Giả Đã Theo Dõi</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('FollowedAuthors')}>
+          <View style={styles.row}>
+            <Ionicons name="people" size={20} color="#1F3C35" style={styles.icon} />
+            <Text style={styles.buttonText}>Danh Sách Tác Giả Đã Theo Dõi</Text>
+          </View>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('HistoryScreen')}
-      >
-        <Text style={styles.buttonText}>Lịch Sử Truyện Đã Xem</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('HistoryScreen')}>
+          <View style={styles.row}>
+            <Ionicons name="time" size={20} color="#1F3C35" style={styles.icon} />
+            <Text style={styles.buttonText}>Lịch Sử Truyện Đã Xem</Text>
+          </View>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('PostStory')}
-      >
-        <Text style={styles.buttonText}>Đăng Truyện Cá Nhân</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PostStory')}>
+          <View style={styles.row}>
+            <Ionicons name="create" size={20} color="#1F3C35" style={styles.icon} />
+            <Text style={styles.buttonText}>Đăng Truyện Cá Nhân</Text>
+          </View>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        <Text style={styles.logoutText}>Đăng Xuất</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+          <View style={styles.row}>
+            <Ionicons name="log-out" size={20} color="#fff" style={styles.icon} />
+            <Text style={styles.logoutText}>Đăng Xuất</Text>
+          </View>
+        </TouchableOpacity>
+        </View>        
     </View>
   );
 };
@@ -101,51 +107,74 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#1F3C35',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    padding: 20,
+    paddingTop: 150,
+    paddingHorizontal: 20,
   },
   user :{
-    justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 1,
   },
   avatar: {
-    width: 60,
-    height: 60,
-    borderRadius: 30, // Đảm bảo avatar là hình tròn
-    marginRight: 10,
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    marginBottom: 10,
   },
   header: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 40,
-    color: '#333',
+    color: '#1F3C35',
+  },
+   menu:{
+    width: 400,
+    height: "100%", 
+    backgroundColor: 'white',
+    borderRadius: 15,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    position: 'absolute', 
+    top: '35%', 
+    zIndex: 0,
+    paddingTop:150,
   },
   button: {
-    width: '100%',
-    padding: 15,
-    backgroundColor: '#4CAF50',
-    borderRadius: 8,
-    marginVertical: 10,
+    flexDirection: 'row',
     alignItems: 'center',
+    paddingVertical: 12,
+    borderBottomColor: '#ccc',
+    paddingLeft: 30,
+    paddingTop:25,
   },
   buttonText: {
     fontSize: 16,
-    color: '#fff',
+    color: '#2c3e50',
+    marginLeft: 10,
   },
   logoutButton: {
-    marginTop: 20,
+    marginTop: 50,
     padding: 15,
-    backgroundColor: '#f44336',
+    backgroundColor: '#3B6C58',
     borderRadius: 8,
-    width: '100%',
+    width: '80%',
     alignItems: 'center',
+    marginLeft:30,
   },
   logoutText: {
     fontSize: 16,
     color: '#fff',
   },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icon: {
+    marginRight: 10,
+  },
+
 });
 
 export default ProfileScreen;

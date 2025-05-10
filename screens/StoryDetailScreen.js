@@ -129,12 +129,31 @@ const StoryDetailScreen = ({ route }) => {
 
       {updatedStory.chapters && updatedStory.chapters.length > 0 ? (
         <View style={styles.chapterList}>
-          <Text style={styles.chapterListTitle}>Các Chương Đã Được Thêm:</Text>
+          <Text style={styles.chapterListTitle}>Danh sách chương:</Text>
           {updatedStory.chapters.map((chapter, index) => (
             <View key={index} style={styles.chapterItem}>
               <TouchableOpacity style={styles.chapterTextContainer} onPress={() => handleChapterPress(chapter, updatedStory.chapters, updatedStory.title)}>
                 <Text style={styles.chapterTitle}>{chapter.title}</Text>
               </TouchableOpacity>
+              
+              <TouchableOpacity
+                style={styles.editButton}
+                onPress={() => navigation.navigate('EditChapterScreen', {
+                  chapter: chapter,
+                  chapters: updatedStory.chapters,
+                  storyTitle: updatedStory.title,
+                  onUpdateChapter: async (editedChapter) => {
+                    const newChapters = [...updatedStory.chapters];
+                    newChapters[index] = editedChapter;
+                    const updatedStoryData = { ...updatedStory, chapters: newChapters };
+                    await updateStoryInStorage(updatedStoryData);
+                    Alert.alert('Thành công', 'Chương đã được cập nhật!');
+                  }
+                })}
+              >
+                <Text style={styles.editButtonText}>Sửa</Text>
+              </TouchableOpacity>
+
               <TouchableOpacity
                 style={styles.deleteButton}
                 onPress={() =>
@@ -147,6 +166,7 @@ const StoryDetailScreen = ({ route }) => {
                 <Text style={styles.deleteButtonText}>Xóa</Text>
               </TouchableOpacity>
             </View>
+
           ))}
         </View>
       ) : (
@@ -161,12 +181,11 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: '#fff',
-    marginTop: 20,
+
   },
   backButton: {
     position: 'absolute',
-    top: 20,
-    left: 20,
+    top: 10,
     padding: 10,
     zIndex: 10,
   },
@@ -175,11 +194,18 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   thumbnail: {
+    marginTop: 20,
     width: 200,
     height: 250,
     borderRadius: 10,
     marginBottom: 10,
+    shadowColor: '#000', 
+    shadowOffset: { width: 0, height: 4 }, 
+    shadowOpacity: 0.3, 
+    shadowRadius: 6,
+    elevation: 6, 
   },
+
   title: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -288,6 +314,17 @@ const styles = StyleSheet.create({
     top: 20,
     right: 20,
   },
+  editButton: {
+  padding: 5,
+  backgroundColor: '#ffa500',
+  borderRadius: 5,
+  marginHorizontal: 5,
+  },
+  editButtonText: {
+    color: 'white',
+    fontSize: 14,
+  },
+
 });
 
 export default StoryDetailScreen;

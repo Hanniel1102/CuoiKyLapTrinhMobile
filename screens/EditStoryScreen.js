@@ -124,11 +124,16 @@ const EditStoryScreen = ({ route, navigation }) => {
         <Text style={styles.noImage}>Chưa có ảnh</Text>
       )}
 
-      <View style={styles.buttonGroup}>
-        <Button title="Cập nhật" color="#4CAF50" onPress={updateStoryInStorage} />
-        <View style={{ height: 10 }} />
-        <Button title="Hủy" color="#F44336" onPress={() => navigation.goBack()} />
+      <View style={styles.buttonRow}>
+        <View style={styles.buttonWrapper}>
+          <Button title="Hủy" color="#F44336"  onPress={() => navigation.goBack()} />
+        </View>
+        <View style={styles.buttonWrapper}>
+          <Button title="Cập nhật" color="#4CAF50" onPress={updateStoryInStorage} />
+        </View>
+        
       </View>
+
     </View>
   );
 };
@@ -156,7 +161,7 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
   },
   textArea: {
-    height: 100,
+    height: 200,
     textAlignVertical: 'top',
   },
   pickerWrapper: {
@@ -166,13 +171,8 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     overflow: 'hidden',
     backgroundColor: '#f1f1f1',
+    height: 60
   },
-  picker: {
-    height: 40,
-    width: '100%',
-    color: '#333',
-  },
-
   imageButton: {
     backgroundColor: '#2196F3',
     padding: 12,
@@ -195,16 +195,24 @@ const styles = StyleSheet.create({
     color: '#999',
     marginBottom: 12,
   },
-  buttonGroup: {
-    marginTop: 10,
-  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+    },
+    buttonWrapper: {
+      flex: 1,
+      marginHorizontal: 5,
+      borderRadius: 20,
+    },
+
   picker: {
-    height: 50,
+    height: 70,
     width: '100%',
     borderColor: '#ddd',
     borderWidth: 1,
     borderRadius: 8,
-    marginBottom: 12,
+    marginBottom: 12,   
   },
 });
 

@@ -1,10 +1,12 @@
 // AddChapterScreen.js
 import React, { useState } from 'react';
 import { View, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AddChapterScreen = ({ route, navigation }) => {
-  const { story, updateStoryInStorage } = route.params;
+  const { story } = route.params;
   const [chapterTitle, setChapterTitle] = useState('');
   const [chapterContent, setChapterContent] = useState('');
 
@@ -13,36 +15,62 @@ const AddChapterScreen = ({ route, navigation }) => {
       return Alert.alert('Thông báo', 'Vui lòng nhập đầy đủ thông tin chương!');
     }
 
-    const newChapter = { title: chapterTitle, content: chapterContent };
-    const updatedStoryData = { ...story, chapters: [...(story.chapters || []), newChapter] };
+    try {
+      const username = await AsyncStorage.getItem('username');
+      if (!username) return Alert.alert('Lỗi', 'Không tìm thấy username.');
 
-    await updateStoryInStorage(updatedStoryData);
+      const savedStories = await AsyncStorage.getItem(`stories_${username}`);
+      const stories = savedStories ? JSON.parse(savedStories) : [];
 
-    Alert.alert('Thành công', 'Chương mới đã được thêm vào truyện!');
-    setChapterTitle('');
-    setChapterContent('');
-    navigation.goBack(); // Navigate back to the previous screen
+      const index = stories.findIndex(item => item.id === story.id);
+      if (index === -1) return Alert.alert('Lỗi', 'Không tìm thấy truyện.');
+
+      const newChapter = { title: chapterTitle, content: chapterContent };
+      const updatedChapters = [newChapter, ...(stories[index].chapters || [])];
+      stories[index].chapters = updatedChapters;
+
+      await AsyncStorage.setItem(`stories_${username}`, JSON.stringify(stories));
+
+      Alert.alert('Thành công', 'Chương mới đã được thêm vào truyện!');
+      setChapterTitle('');
+      setChapterContent('');
+      navigation.goBack();
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Lỗi', 'Không thể thêm chương.');
+    }
   };
+return (
+  <KeyboardAvoidingView
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    style={styles.container}
+  >
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={styles.buttonRow}>
+          <Button title="Hủy" onPress={() => navigation.goBack()} color="red" />
+          <Button title="Thêm Chương" onPress={handleAddChapter} />
+        </View>
 
-  return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Tiêu đề chương"
-        value={chapterTitle}
-        onChangeText={setChapterTitle}
-      />
-      <TextInput
-        style={[styles.input, styles.textArea]}
-        placeholder="Nội dung chương"
-        value={chapterContent}
-        onChangeText={setChapterContent}
-        multiline
-      />
-      <Button title="Thêm Chương" onPress={handleAddChapter} />
-      <Button title="Hủy" onPress={() => navigation.goBack()} color="red" />
-    </View>
-  );
+        <TextInput
+          style={styles.input}
+          placeholder="Tiêu đề chương"
+          value={chapterTitle}
+          onChangeText={setChapterTitle}
+        />
+        <View style={styles.separator} />
+        <TextInput
+          style={[styles.input, styles.textArea]}
+          placeholder="Nội dung chương"
+          value={chapterContent}
+          onChangeText={setChapterContent}
+          multiline
+        />
+      </ScrollView>
+    </TouchableWithoutFeedback>
+  </KeyboardAvoidingView>
+);
+
 };
 
 const styles = StyleSheet.create({
@@ -51,15 +79,24 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#fff',
   },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 10,
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
   },
+  input: {
+    padding: 10,
+    marginBottom: 10,
+    fontSize: 16,
+    borderRadius: 5,
+  },
+  separator: {
+  height: 1,
+  backgroundColor: '#ccc',
+  marginVertical: 10,
+},
   textArea: {
-    height: 100,
+    height: 7700,
     textAlignVertical: 'top',
   },
 });

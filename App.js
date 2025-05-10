@@ -24,6 +24,7 @@ import StoryDetailScreen from './screens/StoryDetailScreen';
 import ChapterDetailScreen from './screens/ChapterDetailScreen';
 import AddChapterScreen from './screens/AddChapterScreen';
 import EditStoryScreen from './screens/EditStoryScreen';
+import EditChapterScreen from './screens/EditChapterScreen';
 
 const Stack = createStackNavigator();
 
@@ -68,10 +69,9 @@ const ScreenWithBottomMenu = ({ navigation, children }) => {
   return (
     <View style={{ flex: 1 }}>
       {children}
-
       {/* Bottom Menu */}
       <View style={styles.bottomMenu}>
-        {['Home', 'Category', 'Search', 'Profile'].map((menu, index) => (
+        {['Home', 'Category', 'Search', 'PostStory', 'Profile'].map((menu, index) => (
           <Animated.View
             key={menu}
             style={[ 
@@ -86,7 +86,13 @@ const ScreenWithBottomMenu = ({ navigation, children }) => {
               onPress={() => handlePress(menu)} // Điều hướng tới màn hình
             >
               <Ionicons
-                name={menu === 'Home' ? 'home' : menu === 'Category' ? 'list' : menu === 'Search' ? 'search' : 'person'}
+                name={
+                  menu === 'Home' ? 'home' :
+                  menu === 'Category' ? 'list' :
+                  menu === 'Search' ? 'search' :
+                  menu === 'PostStory' ? 'pencil-outline' : 
+                  'person'
+                }
                 size={24}
                 color={activeMenu === menu ? '#007bff' : '#333'}
               />
@@ -104,11 +110,16 @@ const ScreenWithBottomMenu = ({ navigation, children }) => {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          animationEnabled: false, // Tắt hiệu ứng chuyển trang
+        }}
+      >
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
-
+        
         {/* Bọc HomeScreen và CategoryScreen với ScreenWithBottomMenu */}
         <Stack.Screen 
           name="Home" 
@@ -136,6 +147,15 @@ export default function App() {
           )}
         />
         <Stack.Screen 
+          name='PostStory' 
+          component={(props) => (
+            <ScreenWithBottomMenu {...props}>
+              <PostStory/>
+            </ScreenWithBottomMenu>
+          )} 
+        />
+          
+        <Stack.Screen 
           name="Profile" 
           component={(props) => (
             <ScreenWithBottomMenu {...props}>
@@ -151,12 +171,13 @@ export default function App() {
         <Stack.Screen name='FollowedAuthors' component={FollowedAuthors}/>
         <Stack.Screen name='HistoryScreen' component={HistoryScreen}/>
         <Stack.Screen name='UserProfileScreen' component={UserProfileScreen}/>
-        <Stack.Screen name='PostStory' component={PostStory} />
         <Stack.Screen name='AddStoryScreen' component={AddStoryScreen} />
         <Stack.Screen name='StoryDetailScreen' component={StoryDetailScreen} />
         <Stack.Screen name='ChapterDetailScreen' component={ChapterDetailScreen} />
         <Stack.Screen name='AddChapterScreen' component={AddChapterScreen} />
         <Stack.Screen name='EditStoryScreen' component={EditStoryScreen} />
+        <Stack.Screen name='EditChapterScreen' component={EditChapterScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
