@@ -22,6 +22,9 @@ import PostStory from './screens/PostStory';
 import AddStoryScreen from './screens/AddStoryScreen';
 import StoryDetailScreen from './screens/StoryDetailScreen';
 import ChapterDetailScreen from './screens/ChapterDetailScreen';
+import AddChapterScreen from './screens/AddChapterScreen';
+import EditStoryScreen from './screens/EditStoryScreen';
+
 const Stack = createStackNavigator();
 
 // Component để bao bọc các màn hình có bottom menu
@@ -152,6 +155,8 @@ export default function App() {
         <Stack.Screen name='AddStoryScreen' component={AddStoryScreen} />
         <Stack.Screen name='StoryDetailScreen' component={StoryDetailScreen} />
         <Stack.Screen name='ChapterDetailScreen' component={ChapterDetailScreen} />
+        <Stack.Screen name='AddChapterScreen' component={AddChapterScreen} />
+        <Stack.Screen name='EditStoryScreen' component={EditStoryScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

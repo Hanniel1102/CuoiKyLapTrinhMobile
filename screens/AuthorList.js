@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView, Alert, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 import { fetchBooksByAuthors } from '../API/api'; // Đảm bảo bạn đã khai báo hàm fetchBooksByAuthors trong API
 
@@ -30,11 +30,17 @@ const AuthorList = ({ route, navigation }) => {
     getFollowedAuthors();
   }, []);
 
-  // Lấy sách theo tác giả khi nhấn vào tác giả
   const handleAuthorPress = async (author) => {
     setLoading(true);
+    const authorName = author.name;
+    if (typeof authorName !== 'string' || authorName.trim() === '') {
+      console.error('authorName không phải là chuỗi hợp lệ:', authorName);
+      setLoading(false);
+      return;
+    }
+
     try {
-      const booksByAuthor = await fetchBooksByAuthors(author);
+      const booksByAuthor = await fetchBooksByAuthors(authorName); // Gọi hàm với authorName
       setLoading(false);
       navigation.navigate('BooksByAuthors', { author, books: booksByAuthor });
     } catch (error) {
@@ -43,32 +49,35 @@ const AuthorList = ({ route, navigation }) => {
     }
   };
 
-  // Thêm hoặc bỏ theo dõi tác giả
-  const handleFollowAuthor = async (author) => {
-    if (!username) {
-      Alert.alert('Thông báo', 'Bạn cần đăng nhập để thêm sách vào yêu thích.');
-      return;
+const handleFollowAuthor = async (author) => {
+  if (!username) {
+    Alert.alert('Thông báo', 'Bạn cần đăng nhập để thêm sách vào yêu thích.');
+    return;
+  }
+  try {
+    const authorName = author.name;
+    // Kiểm tra xem tác giả đã có trong danh sách yêu thích chưa
+    const isFollowed = followedAuthors.some(followedAuthor => followedAuthor === authorName);
+    
+    if (isFollowed) {
+      // Nếu tác giả đã được theo dõi, xóa khỏi danh sách
+      const updatedFollowedAuthors = followedAuthors.filter(item => item !== authorName);
+      setFollowedAuthors(updatedFollowedAuthors);
+      await AsyncStorage.setItem(`followedAuthors_${username}`, JSON.stringify(updatedFollowedAuthors));
+      console.log(`${authorName} đã được bỏ theo dõi.`);
+    } else {
+      // Nếu tác giả chưa được theo dõi, thêm vào danh sách
+      const updatedFollowedAuthors = [...followedAuthors, authorName];
+      setFollowedAuthors(updatedFollowedAuthors);
+      await AsyncStorage.setItem(`followedAuthors_${username}`, JSON.stringify(updatedFollowedAuthors));
     }
 
-    try {
-      if (followedAuthors.includes(author)) {
-        // Nếu tác giả đã được theo dõi, xóa khỏi danh sách
-        const updatedFollowedAuthors = followedAuthors.filter(item => item !== author.name);
-        setFollowedAuthors(updatedFollowedAuthors);
-        await AsyncStorage.setItem(`followedAuthors_${username}`, JSON.stringify(updatedFollowedAuthors));
-        Alert.alert('Đã bỏ theo dõi', `${author.name} đã được bỏ theo dõi.`);
-      } else {
-        // Nếu tác giả chưa được theo dõi, thêm vào danh sách
-        const updatedFollowedAuthors = [...followedAuthors, author.name];
-        setFollowedAuthors(updatedFollowedAuthors);
-        await AsyncStorage.setItem(`followedAuthors_${username}`, JSON.stringify(updatedFollowedAuthors));
-        Alert.alert('Thành công', `${author} đã được theo dõi.`);
-      }
-    } catch (error) {
-      console.error('Lỗi khi thao tác với yêu thích:', error);
-      Alert.alert('Lỗi', 'Đã có lỗi xảy ra khi thao tác với yêu thích.');
-    }
-  };
+  } catch (error) {
+    console.error('Lỗi khi thao tác với yêu thích:', error);
+    Alert.alert('Lỗi', 'Đã có lỗi xảy ra khi thao tác với yêu thích.');
+  }
+};
+
 
   return (
     <View style={styles.container}>
@@ -78,19 +87,31 @@ const AuthorList = ({ route, navigation }) => {
         <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />
       ) : (
         <ScrollView style={styles.authorList}>
+          
           {authors.map((author, index) => (
+            <TouchableOpacity onPress={() => handleAuthorPress(author)}>
             <View key={index} style={styles.authorItem}>
+              {author.pic ? (
+                <Image source={{ uri: author.pic }} style={styles.authorImage} />
+              ) : (
+                <View style={styles.noImageContainer}>
+                  <Text style={styles.noImageText}>No Image</Text>
+                </View>
+              )}
+
               <Text style={styles.authorName}>{author.name}</Text>
               <TouchableOpacity
                 style={[styles.followButton, followedAuthors.includes(author.name) && styles.followedButton]}
-                onPress={() => handleFollowAuthor(author.name)}
+                onPress={() => handleFollowAuthor(author)}
               >
                 <Text style={styles.followButtonText}>
                   {followedAuthors.includes(author.name) ? 'Bỏ theo dõi' : 'Theo dõi'}
                 </Text>
               </TouchableOpacity>
             </View>
+            </TouchableOpacity>
           ))}
+          
         </ScrollView>
       )}
     </View>
@@ -125,6 +146,24 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 2,
+  },
+  authorImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 10,
+  },
+  noImageContainer: {
+    width: 50,
+    height: 50,
+    backgroundColor: '#ddd',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 25,
+    marginRight: 10,
+  },
+  noImageText: {
+    color: '#888',
   },
   authorName: {
     fontSize: 16,

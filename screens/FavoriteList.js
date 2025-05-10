@@ -26,7 +26,7 @@ const FavoriteList = () => {
     };
 
     getFavoriteBooks();
-  }, []);
+  }, []); // Gọi effect khi component mount
 
   // Hàm để xóa sách khỏi danh sách yêu thích
   const removeFromFavorites = async (item) => {
@@ -52,10 +52,12 @@ const FavoriteList = () => {
     }
   };
 
+  // Hàm render mỗi sách trong danh sách yêu thích
   const renderBookItem = ({ item }) => (
     <View style={styles.bookItem}>
       <Text style={styles.bookTitle}>{item.title}</Text>
-      <Text style={styles.bookAuthor}>{item.authors?.join(', ')}</Text>
+      <Text style={styles.bookAuthor}>{item.authors?.map(author => author.name).join(', ')  ||'Tác giả chưa được cập nhật'}</Text>
+      
       <TouchableOpacity
         style={styles.removeButton}
         onPress={() => removeFromFavorites(item)} // Xóa sách khỏi yêu thích khi nhấn
@@ -65,6 +67,7 @@ const FavoriteList = () => {
     </View>
   );
 
+  // Nếu đang loading, hiển thị vòng tròn loading
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />;
   }
@@ -78,7 +81,7 @@ const FavoriteList = () => {
         <FlatList
           data={favoriteBooks}
           renderItem={renderBookItem}
-          keyExtractor={(item) => item.id.toString()} // Đảm bảo keyExtractor đúng
+          keyExtractor={(item) => item.id ? item.id.toString() : 'no-id'} 
         />
       )}
     </View>

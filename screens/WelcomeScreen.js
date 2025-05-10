@@ -17,11 +17,11 @@ const WelcomeScreen = ({ navigation }) => {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.signInButton} onPress={() => navigation.navigate("Login")}>
-            <Text style={styles.signInButtonText}>Sign In</Text>
+            <Text style={styles.signInButtonText}>Log in</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.navigate("SignUp")}>
-            <Text style={styles.signUnButtonText}>Sign Up</Text>
+            <Text style={styles.signUnButtonText}>Sign up</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -75,31 +75,29 @@ const styles = StyleSheet.create({
         alignItems: 'center',
       },
       signInButton: {
-        width: '40%',
+        width: '45%',
         backgroundColor: '#fff',
-        padding: 15,
         height: 50,
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center', // Đảm bảo chữ luôn ở giữa
       },
       signUpButton: {
-        width: '40%',
+        width: '45%',
         height: 50,
-        backgroundColor: '#008080',
-        padding: 15,
+        backgroundColor: '#A0D4D4',
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center', // Đảm bảo chữ luôn ở giữa
       },
       signInButtonText: {
-        color: '#008080',
-        fontSize: 18,
+        color: '#006666',
+        fontSize: 16,
         fontWeight: 'bold',
       },
       signUnButtonText: {
-        color: '#fff',
-        fontSize: 18,
+        color: '#006666',
+        fontSize: 16,
         fontWeight: 'bold',
       },
 });

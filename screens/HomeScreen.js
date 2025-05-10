@@ -1,50 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet, ActivityIndicator, Image, Alert  } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, ActivityIndicator, Image, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
-import { fetchNewlyUpdatedBooks, fetchRecentHotBooks, fetchAuthors, fetchCategories, fetchBooksByCategory , fetchBooksByAuthors } from '../API/api.js';
+import { fetchNewlyUpdatedBooks, fetchRecentHotBooks, fetchAuthors, fetchCategories, fetchBooksByCategory, fetchBooksByAuthors } from '../API/api.js';
 
 const BookItem = ({ book }) => {
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
-  
-  const handleBookPress = async () => {
-    try {
-      const username = await AsyncStorage.getItem('username');
-      if (!username) {
-        Alert.alert('Lỗi', 'Vui lòng đăng nhập để lưu lịch sử!');
-        return;
-      }
-  
-      const history = await AsyncStorage.getItem(`history_${username}`);
-      const parsedHistory = history ? JSON.parse(history) : [];
-  
-      const updatedHistory = [...parsedHistory, book];
-  
-      await AsyncStorage.setItem(`history_${username}`, JSON.stringify(updatedHistory));
-  
-      navigation.navigate('Detail', { book });
-    } catch (error) {
-      console.error('Error saving to history:', error);
-    }
-  };
-  const imageUrl = book?.link_thumbnail || 'https://via.placeholder.com/100x150'; // Thêm ảnh mặc định nếu không có ảnh
 
+  const handleBookPress = async () => {
+  try {
+    const username = await AsyncStorage.getItem('username');
+    if (!username) {
+      Alert.alert('Lỗi', 'Vui lòng đăng nhập để lưu lịch sử!');
+      return;
+    }
+
+    const history = await AsyncStorage.getItem(`history_${username}`);
+    const parsedHistory = history ? JSON.parse(history) : [];
+
+    // Kiểm tra truyện đã tồn tại chưa
+    const exists = parsedHistory.some(item => item.id === book.id); // hoặc so sánh bằng title nếu không có id
+    if (!exists) {
+      const updatedHistory = [...parsedHistory, book];
+      await AsyncStorage.setItem(`history_${username}`, JSON.stringify(updatedHistory));
+    }
+
+    navigation.navigate('Detail', { book });
+  } catch (error) {
+    console.error('Error saving to history:', error);
+  }
+};
+
+  const imageUrl = book?.link_thumbnail || book?.thumbnail || 'https://via.placeholder.com/100x150'; 
   return (
     <TouchableOpacity style={styles.book} onPress={handleBookPress}>
       <Image
-        source={{ uri: imageUrl }} // Nếu không có ảnh, sẽ dùng ảnh mặc định
+        source={{ uri: imageUrl }} 
         style={styles.bookImage}
       />
-      <Text style={styles.bookTitle}>{book?.title || 'Không có tiêu đề'}</Text>
+      <Text style={styles.bookTitle} numberOfLines={2} ellipsizeMode="tail">
+        {book?.title || 'Không có tiêu đề'}
+      </Text>
     </TouchableOpacity>
   );
 };
-
 const HomeScreen = () => {
   const [newlyUpdatedBooks, setNewlyUpdatedBooks] = useState([]);
   const [recentHotBooks, setRecentHotBooks] = useState([]);
   const [authors, setAuthors] = useState([]);
+  const [allAuthors, setAllAuthors] = useState([]);
   const [categories, setCategories] = useState([]);
   const [userStories, setUserStories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -61,9 +66,10 @@ const HomeScreen = () => {
 
         const booksHot = await fetchRecentHotBooks();
         setRecentHotBooks(booksHot);
-
+        
         const authorsList = await fetchAuthors(booksHot);
-        setAuthors(authorsList); 
+        setAuthors(authorsList.slice(0, 6)); // hiển thị 6 cái ở Home
+        setAllAuthors(authorsList);
 
         const categoriesList = await fetchCategories(booksHot);
         setCategories(categoriesList.slice(0, 5)); 
@@ -128,9 +134,8 @@ const HomeScreen = () => {
   };
 
   const handleViewAllAuthors = () => {
-    navigation.navigate('AuthorList', { authors });
+    navigation.navigate('AuthorList', { authors: allAuthors });
   };
-
   
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />;
@@ -143,9 +148,13 @@ const HomeScreen = () => {
           <Text style={styles.sectionTitle}>Truyện Mới Cập Nhật</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={styles.bookContainer}>
-              {newlyUpdatedBooks.map((book, index) => (
-                <BookItem key={index} book={book} />
-              ))}
+              {newlyUpdatedBooks.length > 0 ? (
+                newlyUpdatedBooks.map((book, index) => (
+                  <BookItem key={index} book={book} />
+                ))
+              ) : (
+                <Text>Chưa có truyện mới cập nhật!</Text>
+              )}
             </View>
           </ScrollView>
         </View>
@@ -154,13 +163,17 @@ const HomeScreen = () => {
           <Text style={styles.sectionTitle}>Truyện Hot Gần Đây</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={styles.bookContainer}>
-              {recentHotBooks.map((book, index) => (
-                <BookItem key={index} book={book} />
-              ))}
+              {recentHotBooks.length > 0 ? (
+                recentHotBooks.map((book, index) => (
+                  <BookItem key={index} book={book} />
+                ))
+              ) : (
+                <Text>Chưa có truyện hot gần đây!</Text>
+              )}
             </View>
           </ScrollView>
         </View>
-{/* 
+
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Truyện Được Đăng Bởi Người Dùng</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -174,41 +187,53 @@ const HomeScreen = () => {
               )}
             </View>
           </ScrollView>
-        </View> */}
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Tác Giả Nổi Bật</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View style={styles.bookContainer}>
-              {authors.map((author, index) => (  // Chỉ hiển thị 5 tác giả đầu tiên
-                <TouchableOpacity
-                  key={index}
-                  style={styles.author}
-                  onPress={() => handleAuthorPress(author)} 
-                >
-                  <Text style={styles.authorName}>{author.name}</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </ScrollView>
-          <TouchableOpacity onPress={() => navigation.navigate('AuthorList', { authors })}>
-            <Text style={styles.viewAll}>Xem tất cả</Text>
-          </TouchableOpacity>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Thể Loại Nổi Bật</Text>
-          <View style={styles.categoriesList}>
-            {categories.map((category, index) => (
-              <TouchableOpacity
-                key={index}
-                style={styles.category}
-                onPress={() => handleCategoryPress(category)} 
-              >
-                <Text style={styles.categoryName}>{category}</Text>
-              </TouchableOpacity>
-            ))}
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={styles.bookContainer}>
+              {categories.length > 0 ? (
+                categories.map((category, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    style={styles.author}
+                    onPress={() => handleCategoryPress(category)} 
+                  >
+                    <Text style={styles.authorName}>{category}</Text>
+                  </TouchableOpacity>
+                ))
+              ) : (
+                <Text>Chưa có thể loại nổi bật!</Text>
+              )}
+            </View>
+          </ScrollView>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Tác Giả Nổi Bật</Text>
+          <View style={styles.authorList}>
+            {authors.length > 0 ? (
+              authors.map((author, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={styles.authorItem}
+                  onPress={() => handleAuthorPress(author)} 
+                >
+                  <Image
+                    source={{ uri: author.pic || 'https://via.placeholder.com/60' }}
+                    style={styles.authorImage}
+                  />
+                  <Text style={styles.authorName}>{author.name}</Text>
+                </TouchableOpacity>
+              ))
+            ) : (
+              <Text>Chưa có tác giả nổi bật!</Text>
+            )}
           </View>
+          <TouchableOpacity onPress={handleViewAllAuthors}>
+            <Text style={styles.viewAll}>Xem tất cả</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
@@ -241,6 +266,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 8,
     width: 120,
+    height: 230,
     alignItems: 'center',
   },
   bookTitle: {
@@ -254,27 +280,30 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 4,
   },
+  authorList: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  authorItem: {
+    width: '30%',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  authorImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginBottom: 5,
+  },
   author: {
     marginRight: 15,
     padding: 10,
     backgroundColor: '#f0f0f0',
     borderRadius: 8,
-  },
-  authorName: {
-    fontSize: 14,
-    textAlign: 'center',
-  },
-  categoriesList: {
-    flexDirection: 'column',
-    marginBottom: 10,
-  },
-  category: {
-    padding: 10,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 8,
     marginBottom: 5,
   },
-  categoryName: {
+  authorName: {
     fontSize: 14,
     textAlign: 'center',
   },

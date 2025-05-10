@@ -57,7 +57,7 @@ export default function SignUp({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
           <Image source={require("../assets/Image/arrow-left.png")} style={styles.arrowIcon} />
         </TouchableOpacity>
         <Text style={styles.header}>Sign Up</Text>
@@ -115,15 +115,17 @@ export default function SignUp({ navigation }) {
         </View>
 
         {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
-        <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
           <Text style={styles.signUpButtonText}>Sign Up</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> 
+        </View>
+       
 
         <Text style={styles.signupText}>
           Already have an account?{" "}
           <Text style={styles.signupLink} onPress={() => navigation.navigate("Login")}>
-            Sign In
+            Log in
           </Text>
         </Text>
 
@@ -146,15 +148,14 @@ export default function SignUp({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgba(34, 33, 33, 0.56)",
+    backgroundColor:  "#fff",
   },
   headerContainer: {
     width: "100%",
-    height: 50,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
-    marginBottom: 80,
+    marginBottom: 70,
     marginTop: 50,
   },
   header: {
@@ -162,7 +163,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     alignItems: "center",
     marginLeft: "30%",
-    color: "#fff",
+    color: "#006666",
+    
   },
   arrowIcon: {
     width: 24,
@@ -180,28 +182,30 @@ const styles = StyleSheet.create({
   welcomeTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#fff",
+    color: "#006666",
   },
   welcomeSubtitle: {
-    fontSize: 16,
-    color: "#fff",
+    fontSize: 14,
+    color: "#000",
     marginTop: 5,
+    marginBottom: 10,
   },
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
     borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
+    borderColor: "#006666",
+    borderRadius: 25,
+    marginTop:10,
     marginBottom: 10,
     paddingHorizontal: 15,
-    backgroundColor: "rgba(210, 206, 212, 0.99)",
+    backgroundColor: "#fff",
     height: 50,
   },
   inputIcon: {
-    width: 24,
-    height: 24,
+    width: 20,
+    height: 20,
     marginRight: 10,
   },
   input: {
@@ -230,13 +234,25 @@ const styles = StyleSheet.create({
     color: "#333",
     marginLeft: 5,
   },
+  forgotPassword: {
+    fontSize: 14,
+    color: "#008080",
+    fontWeight: "bold",
+  },
+  buttonContainer: {
+    alignItems: "center", 
+    justifyContent: "center",
+    marginVertical: 10, 
+  },
   signUpButton: {
-    backgroundColor: "rgba(26, 155, 241, 0.9)",
-    paddingVertical: 15,
-    borderRadius: 10,
+    backgroundColor: "#008080",
+    paddingVertical: 13,
+    borderRadius: 40,
     alignItems: "center",
-    width: "100%",
+    justifyContent: "center",
+    width: "70%",
     marginBottom: 10,
+    
   },
   signUpButtonText: {
     color: "#fff",
@@ -246,8 +262,7 @@ const styles = StyleSheet.create({
   signupText: {
     textAlign: "center",
     fontSize: 14,
-    color: "#fff",
-    marginBottom: 10,
+    color: "#000",
   },
   signupLink: {
     color: "#008080",
@@ -255,10 +270,10 @@ const styles = StyleSheet.create({
   },
   orText: {
     textAlign: "center",
-    fontSize: 14,
-    color: "#fff",
+    fontSize: 12,
+    color: "#008080",
     marginTop: 10,
-    marginBottom: 25,
+    marginBottom: 10,
   },
   socialButton: {
     flexDirection: "row",
@@ -266,14 +281,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     paddingVertical: 12,
-    borderRadius: 10,
+    borderRadius: 25,
     marginBottom: 10,
   },
   facebookButton: {
-    backgroundColor: "#3b5998",
+    borderWidth: 1,
+    borderColor: "#3b5998",
   },
   googleButton: {
-    backgroundColor: "#db4a39",
+    borderWidth: 1,
+    borderColor: "#db4a39",
   },
   socialIcon: {
     width: 24,
@@ -281,8 +298,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   socialButtonText: {
-    color: "#fff",
-    fontSize: 16,
+    color: "#000",
+    fontSize: 14,
     fontWeight: "bold",
   },
 });

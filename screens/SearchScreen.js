@@ -3,7 +3,8 @@ import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet, Activi
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
-const API_BASE_URL = 'http://192.168.194.66:3000/novels'; // Đường dẫn API
+// const API_BASE_URL = 'http://192.168.194.66:3000/novels'; 
+const API_BASE_URL = 'http://192.168.1.22:3000/novels'; // API nội bộ của bạn
 
 const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,8 +14,8 @@ const SearchScreen = () => {
 
   const fetchBooksByTitle = async (title) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}?title_like=${encodeURIComponent(title)}`);
-      return response.data; // Không có .items hay .volumeInfo
+      const response = await axios.get(`${API_BASE_URL}?title=${encodeURIComponent(title)}`);
+      return response.data;
     } catch (error) {   
       console.error('Lỗi khi lấy sách theo tên truyện:', error);
       throw error;
@@ -22,38 +23,37 @@ const SearchScreen = () => {
   };
   const fetchBooksByAuthor = async (author) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}?authors_like=${encodeURIComponent(author)}`);
-      return response.data;
+      const response = await axios.get(`${API_BASE_URL}`);
+      const books = response.data.filter(book =>
+        book.authors && book.authors.some(authorObj =>
+          authorObj.name.toLowerCase().includes(author.toLowerCase()) 
+        )
+      );
+      return books;
     } catch (error) {
       console.error('Lỗi khi lấy sách theo tác giả:', error);
       throw error;
     }
   };
-
-  // Hàm tìm kiếm theo từ khóa
+  
   const handleSearch = async (query) => {
     setLoading(true);
     setSearchQuery(query);
-
     if (!query) {
-      setSearchResults([]); // Nếu không có từ khóa tìm kiếm, không hiển thị kết quả
+      setSearchResults([]); 
       setLoading(false);
       return;
     }
-
     try {
       let books = [];
-      const isAuthorSearch = query.includes('author:');
+      const isAuthorSearch = query.includes('author:'); 
       const searchTerm = isAuthorSearch ? query.replace('author:', '').trim() : query;
-
+  
       if (isAuthorSearch) {
-        books = await fetchBooksByAuthor(searchTerm); // Tìm kiếm theo tác giả
+        books = await fetchBooksByAuthor(searchTerm); 
       } else {
-        books = await fetchBooksByTitle(searchTerm); // Tìm kiếm theo tên truyện
-      }
-
-      console.log('Kết quả tìm kiếm:', books); // Kiểm tra kết quả tìm kiếm
-
+        books = await fetchBooksByTitle(searchTerm); 
+      }  
       setSearchResults(books);
       setLoading(false);
     } catch (error) {
@@ -61,8 +61,7 @@ const SearchScreen = () => {
       setLoading(false);
     }
   };
-
-  // Hàm khi nhấn vào một cuốn sách, điều hướng đến màn hình chi tiết
+  
   const handleBookPress = (book) => {
     navigation.navigate('Detail', { book });
   };
@@ -74,7 +73,7 @@ const SearchScreen = () => {
         style={styles.searchInput}
         placeholder="Nhập tên truyện hoặc tác giả"
         value={searchQuery}
-        onChangeText={(text) => handleSearch(text)} // Tìm kiếm khi thay đổi văn bản
+        onChangeText={(text) => handleSearch(text)} 
         placeholderTextColor="#888"
       />
       {loading ? (
@@ -82,26 +81,27 @@ const SearchScreen = () => {
       ) : (
         <ScrollView style={styles.resultsContainer}>
           {searchResults.length > 0 ? (
-            searchResults.map((book, index) => (
-              <TouchableOpacity key={index} style={styles.bookItem} onPress={() => handleBookPress(book)}>
-                <View style={styles.bookContent}>
-                  {book.link_thumbnail ? (
-                    <Image source={{ uri: book.link_thumbnail }} style={styles.bookImage} />
-                  ) : (
-                    <Text>Không có ảnh bìa</Text>
-                  )}
-                  <View style={styles.bookTextContainer}>
-                    <Text style={styles.bookTitle}>{book.title}</Text>
-                    <Text style={styles.bookInfo}>
-                      Tác giả: {book.authors ? book.authors.join(', ') : 'Chưa có tác giả'}
-                    </Text>                  
-                  </View>
+          searchResults.map((book, index) => (
+            <TouchableOpacity key={index} style={styles.bookItem} onPress={() => handleBookPress(book)}>
+              <View style={styles.bookContent}>
+                {book.link_thumbnail ? (
+                  <Image source={{ uri: book.link_thumbnail }} style={styles.bookImage} />
+                ) : (
+                  <Text>Không có ảnh bìa</Text>
+                )}
+                <View style={styles.bookTextContainer}>
+                  <Text style={styles.bookTitle}>{book.title}</Text>
+                  <Text style={styles.bookInfo}>
+                    Tác giả: {book.authors ? book.authors.map(author => author.name).join(', ') : 'Chưa có tác giả'}
+                  </Text>                  
                 </View>
-              </TouchableOpacity>
-            ))
-          ) : (
-            <Text style={styles.noResults}>Không tìm thấy kết quả.</Text>
-          )}
+              </View>
+            </TouchableOpacity>
+          ))
+        ) : (
+          <Text style={styles.noResults}>Không tìm thấy kết quả.</Text>
+        )}
+
         </ScrollView>
       )}
     </View>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   searchInput: {
-    height: 40,
+    height: 50,
     borderColor: '#ddd',
     borderWidth: 1,
     borderRadius: 8,

@@ -1,23 +1,45 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, StyleSheet, Image, FlatList, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ScrollView, StyleSheet, Image, FlatList, TouchableOpacity, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 
-const BooksByAuthors = ({ route ,navigation}) => {
-  const { author, books } = route.params;  // Lấy tác giả và sách từ params
+const BooksByAuthors = ({ route, navigation }) => {
+  const { author, books } = route.params || {};  // Lấy tác giả và sách từ params, sử dụng default empty object
   const [bookList, setBookList] = useState(books || []); // Lưu sách theo tác giả vào state
+  const [followedAuthors, setFollowedAuthors] = useState([]); // Lưu danh sách tác giả đã theo dõi
+  const [username, setUsername] = useState(''); // Lưu tên người dùng
 
+  // Tính tổng số lượt đọc của các sách
   const totalViews = bookList.reduce((total, book) => total + (book.view_count || 0), 0);
+
+  // Lấy danh sách tác giả đã theo dõi từ AsyncStorage khi component load
+ useEffect(() => {
+    const getFollowedAuthors = async () => {
+      try {
+        const storedUsername = await AsyncStorage.getItem('username');
+        setUsername(storedUsername); // Lưu username vào state
+
+        if (storedUsername) {
+          const followed = await AsyncStorage.getItem(`followedAuthors_${storedUsername}`);
+          if (followed) {
+            setFollowedAuthors(JSON.parse(followed)); // Cập nhật lại danh sách tác giả đã theo dõi
+          }
+        }
+      } catch (error) {
+        console.error('Lỗi khi lấy danh sách tác giả đã theo dõi:', error);
+      }
+    };
+
+    getFollowedAuthors();
+  }, []);
 
   // Render mỗi sách với hình ảnh thumbnail và tên
   const renderBookItem = ({ item }) => (
     <TouchableOpacity
-          style={styles.bookItem}
-          onPress={() => navigation.navigate('Detail', { book: item })} // Điều hướng tới DetailScreen khi nhấn vào sách
-        >
+      style={styles.bookItem}
+      onPress={() => navigation.navigate('Detail', { book: item })} // Điều hướng tới DetailScreen khi nhấn vào sách
+    >
       {item && item.link_thumbnail ? (
-        <Image
-          source={{ uri: item.link_thumbnail }}
-          style={styles.bookImage}
-        />
+        <Image source={{ uri: item.link_thumbnail }} style={styles.bookImage} />
       ) : (
         <View style={styles.noImageContainer}>
           <Text style={styles.noImageText}>No Image</Text>
@@ -27,28 +49,78 @@ const BooksByAuthors = ({ route ,navigation}) => {
     </TouchableOpacity>
   );
 
+  // Xử lý việc theo dõi tác giả
+  const handleFollowAuthor = async (author) => {
+  if (!username) {
+    Alert.alert('Thông báo', 'Bạn cần đăng nhập để thêm sách vào yêu thích.');
+    return;
+  }
+  try {
+    const authorName = author.name;
+    // Kiểm tra xem tác giả đã có trong danh sách yêu thích chưa
+    const isFollowed = followedAuthors.some(followedAuthor => followedAuthor === authorName);
+    
+    if (isFollowed) {
+      // Nếu tác giả đã được theo dõi, xóa khỏi danh sách
+      const updatedFollowedAuthors = followedAuthors.filter(item => item !== authorName);
+      setFollowedAuthors(updatedFollowedAuthors);
+      await AsyncStorage.setItem(`followedAuthors_${username}`, JSON.stringify(updatedFollowedAuthors));
+      console.log(`${authorName} đã được bỏ theo dõi.`);
+    } else {
+      // Nếu tác giả chưa được theo dõi, thêm vào danh sách
+      const updatedFollowedAuthors = [...followedAuthors, authorName];
+      setFollowedAuthors(updatedFollowedAuthors);
+      await AsyncStorage.setItem(`followedAuthors_${username}`, JSON.stringify(updatedFollowedAuthors));
+    }
+
+  } catch (error) {
+    console.error('Lỗi khi thao tác với yêu thích:', error);
+    Alert.alert('Lỗi', 'Đã có lỗi xảy ra khi thao tác với yêu thích.');
+  }
+};
+
   return (
     <View style={styles.container}>
       {/* Thông tin tác giả */}
       <View style={styles.authorInfo}>
-        <Image source={{ uri: author.pic }} style={styles.authorImage} />
+        {author && author.pic ? (
+          <Image source={{ uri: author.pic }} style={styles.authorImage} />
+        ) : (
+          <View style={styles.noImageContainer}>
+            <Text style={styles.noImageText}>No Image</Text>
+          </View>
+        )}
         <View style={styles.authorDetails}>
-          <Text style={styles.authorName}>{author.name}</Text>
-          <Text style={styles.authorBirth}>Ngày sinh: {author.birth}</Text>
+          <Text style={styles.authorName}>{author ? author.name : 'Unknown'}</Text>
+          <Text style={styles.authorBirth}>Ngày sinh: {author ? author.birth : 'N/A'}</Text>
         </View>
       </View>
 
+      {/* Nút theo dõi */}
+      <TouchableOpacity
+        style={[styles.followButton, followedAuthors.includes(author.name) && styles.followedButton]}
+        onPress={() => handleFollowAuthor(author)}
+      >
+        <Text style={styles.followButtonText}>
+          {followedAuthors.includes(author.name) ? 'Bỏ theo dõi' : 'Theo dõi'}
+        </Text>
+      </TouchableOpacity>
+
       {/* Danh sách sách của tác giả */}
-      <View style={styles.container}>
-        <Text style={styles.title}>Sách của {author.name}</Text>
+      <View style={styles.bookListContainer}>
+        <Text style={styles.title}>Sách của {author ? author.name : 'Tác giả'}</Text>
         <Text style={styles.totalViews}>Tổng số lượt đọc: {totalViews}</Text>
-        <FlatList
-          data={bookList}
-          renderItem={renderBookItem}
-          keyExtractor={(item, index) => index.toString()}
-          numColumns={2} // Hiển thị 2 cột
-          contentContainerStyle={styles.bookList}
-        />
+        {bookList && bookList.length > 0 ? (
+          <FlatList
+            data={bookList}
+            renderItem={renderBookItem}
+            keyExtractor={(item, index) => index.toString()}
+            numColumns={2} // Hiển thị 2 cột
+            contentContainerStyle={styles.bookList}
+          />
+        ) : (
+          <Text style={styles.noBooksText}>Không có sách nào của tác giả này.</Text>
+        )}
       </View>
     </View>
   );
@@ -73,15 +145,30 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 5,
-    elevation: 3, // Tạo hiệu ứng bóng đổ
-    marginTop: 30, // Đẩy phần thông tin tác giả xuống dưới (30 là giá trị ví dụ)
+    elevation: 3,
+    marginTop: 30,
   },
 
   authorImage: {
     width: 80,
     height: 80,
-    borderRadius: 40, // Hình tròn
-    marginRight: 20, // Khoảng cách giữa ảnh và thông tin
+    borderRadius: 40,
+    marginRight: 20,
+  },
+
+  noImageContainer: {
+    width: 80,
+    height: 80,
+    backgroundColor: '#ddd',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 40,
+  },
+
+  noImageText: {
+    fontSize: 14,
+    color: '#fff',
+    fontWeight: 'bold',
   },
 
   authorDetails: {
@@ -100,6 +187,27 @@ const styles = StyleSheet.create({
     color: '#555',
   },
 
+  // Nút theo dõi
+  followButton: {
+    marginTop: 8,
+    marginBottom: 10,
+    backgroundColor: '#007bff',
+    paddingVertical: 6,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+    alignSelf: 'flex-start',
+  },
+
+  followedButton: {
+    backgroundColor: '#aaa',
+  },
+
+  followButtonText: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+
   // Phần hiển thị tổng số lượt đọc
   totalViews: {
     fontSize: 16,
@@ -115,6 +223,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
     color: '#333',
+  },
+
+  bookListContainer: {
+    flex: 1,
   },
 
   bookList: {
@@ -136,21 +248,6 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 4,
     marginBottom: 10,
-  },
-
-  noImageContainer: {
-    width: 100,
-    height: 150,
-    backgroundColor: '#ddd',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 4,
-    marginBottom: 10,
-  },
-
-  noImageText: {
-    fontSize: 12,
-    color: '#555',
   },
 
   bookTitle: {

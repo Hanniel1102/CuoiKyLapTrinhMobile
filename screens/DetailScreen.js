@@ -13,7 +13,7 @@ const DetailScreen = ({ route, navigation }) => {
   const [modalTranslateY] = useState(new Animated.Value(500)); // Start from below the screen
   const [username, setUsername] = useState(''); // Lưu tên người dùng
   const [reviews, setReviews] = useState([]);
-  
+
   useEffect(() => {
     // Lấy thông tin username từ AsyncStorage
     const getUsername = async () => {
@@ -41,6 +41,7 @@ const DetailScreen = ({ route, navigation }) => {
   
     getUsername();
     loadReviews();
+    
   }, [book.title]);; // Kiểm tra lại khi ID sách thay đổi
 
   // Hiệu ứng mở modal
@@ -135,14 +136,14 @@ const DetailScreen = ({ route, navigation }) => {
           </View>
         )}
         keyExtractor={(item) => item.id.toString()} // Dùng ID của review làm key
+        ontentContainerStyle={{ flexGrow: 1 }} 
+        style={{ maxHeight: 300 }} 
       />
     );
   };
   
-
-   // Hàm để hiển thị chi tiết chương khi người dùng nhấn vào một chương
-   const handleChapterPress = (chapter) => {
-    navigation.navigate('ChapterDetailScreen', { chapter }); // Chuyển sang màn hình ChapterDetailScreen và truyền dữ liệu chapter
+   const handleChapterPress = (chapter, chapters, storyTitle ) => {
+    navigation.navigate('ChapterDetailScreen', { chapter,chapters,storyTitle }); // Chuyển sang màn hình ChapterDetailScreen và truyền dữ liệu chapter
   };
 
   const renderTabContent = () => {
@@ -151,13 +152,17 @@ const DetailScreen = ({ route, navigation }) => {
         return <Text style={styles.description}>{book.description || "No description available."}</Text>;
       case 'chapters':
         return (
-          <View style={styles.chapterList}>
-            {book.chapters?.map((chapter, index) => (
-              <TouchableOpacity key={index} style={styles.chapterItem} onPress={() => handleChapterPress(chapter)}>
+          <ScrollView style={styles.chapterList} contentContainerStyle={styles.chapterListContainer}>
+              {book.chapters?.map((chapter, index) => (
+              <TouchableOpacity 
+                key={index} 
+                style={styles.chapterItem} 
+                onPress={() => handleChapterPress(chapter, book.chapters, book.title)}
+              >
                 <Text style={styles.chapterText}>{chapter.title}</Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </ScrollView>
         );
       case 'reviews':
         return (
@@ -174,7 +179,7 @@ const DetailScreen = ({ route, navigation }) => {
   }; 
 
   return (
-    <ScrollView style={styles.container}>
+    <View  style={styles.container}>
       {/* Nút quay lại */}
       <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
         <Icon name="arrowleft" size={30} color="#333" />
@@ -183,16 +188,16 @@ const DetailScreen = ({ route, navigation }) => {
       <View style={styles.header}>
         {/* Ảnh bìa sách */}
         <Image
-          source={{ uri: book.link_thumbnail || 'https://via.placeholder.com/100x150.png' }}
+          source={{ uri: book.thumbnail || book.link_thumbnail || 'https://via.placeholder.com/100x150.png' }}
           style={styles.bookImage}
         />
         <View style={styles.bookInfo}>
         <Text style={styles.bookTitle}>{book.title}</Text>
           <Text style={styles.bookAuthor}>
-            {book.authors?.map(author => author.name).join(', ') || 'Unknown Author'}
+            {book.authors?.map(author => author.name).join(', ') ||username|| 'Unknown Author'}
           </Text>
-          <Text style={styles.bookCategory}>{book.categories?.join(', ') || 'No Category'}</Text>
-          <Text style={styles.bookCategory}>{book.view_count || 'No View'}</Text>
+          <Text style={styles.bookCategory}>{book.categories?.join(', ') || book.category|| 'No Category'}</Text>
+          <Text style={styles.bookCategory}>{book.view_count|| 'No View'}</Text>
         </View>
       </View>
 
@@ -243,8 +248,9 @@ const DetailScreen = ({ route, navigation }) => {
             <Button title="Cancel" onPress={() => setModalVisible(false)} color="red" />
           </View>
         </View>
+        
       </Modal>
-    </ScrollView>
+    </View>
   );
 };
 

@@ -8,6 +8,9 @@
       "android",
       "web"
     ],
-    "newArchEnabled": true
+    "newArchEnabled": true,
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

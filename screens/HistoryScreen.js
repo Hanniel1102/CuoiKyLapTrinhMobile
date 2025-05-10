@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const HistoryScreen = () => {
+const HistoryScreen = ({ route }) => {
   const [history, setHistory] = useState([]);
   const [username, setUsername] = useState('');
 
@@ -13,14 +13,16 @@ const HistoryScreen = () => {
         const storedUsername = await AsyncStorage.getItem('username');
         if (storedUsername) {
           setUsername(storedUsername);
+        } else {
+          setUsername(route.params?.username || '');  // Đảm bảo có giá trị mặc định
         }
       } catch (error) {
-        console.error('Error loading username:', error);
+        console.error('Lỗi khi lấy tên người dùng:', error);
       }
     };
 
-    getUsername(); // Kiểm tra khi component được render
-  }, []);
+    getUsername();  // Kiểm tra khi component được render
+  }, [route.params?.username]); // Thêm `route.params?.username` vào dependency
 
   // Lấy lịch sử từ AsyncStorage riêng của người dùng
   useEffect(() => {
@@ -32,22 +34,23 @@ const HistoryScreen = () => {
             setHistory(JSON.parse(historyData));
           }
         } catch (error) {
-          console.error('Error loading history:', error);
+          console.error('Lỗi khi lấy lịch sử:', error);
         }
       };
-      loadHistory(); // Kiểm tra khi username thay đổi
+
+      loadHistory();  // Kiểm tra khi username thay đổi
     }
   }, [username]);
 
-  // Handle removing a book from history
+  // Xử lý khi người dùng muốn xóa sách khỏi lịch sử
   const handleRemoveFromHistory = async (book) => {
     try {
       const updatedHistory = history.filter((item) => item.id !== book.id);
       setHistory(updatedHistory);
       await AsyncStorage.setItem(`history_${username}`, JSON.stringify(updatedHistory));
-      Alert.alert('Removed', `${book.title} has been removed from history.`);
+      Alert.alert('Đã xóa', `${book.title} đã được xóa khỏi lịch sử.`);
     } catch (error) {
-      console.error('Error removing from history:', error);
+      console.error('Lỗi khi xóa khỏi lịch sử:', error);
     }
   };
 

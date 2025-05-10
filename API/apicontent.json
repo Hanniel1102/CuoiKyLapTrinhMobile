@@ -123,7 +123,7 @@
         ],
         "categories": ["Literature", "Short Stories"],
         "description": "Câu chuyện về những con người trong cuộc sống đầy khó khăn nhưng vẫn nỗ lực sống với niềm tin vào cái đẹp và sự sống.",
-        "link_thumbnail": "https://upload.wikimedia.org/wikipedia/vi/thumb/3/3d/T%C3%B4i_th%E1%BA%A5y_hoa_v%C3%A0ng_tr%C3%An_c%E1%BB%8F_xanh.jpg/220px-T%C3%B4i_th%E1%BA%A5y_hoa_v%C3%A0ng_tr%C3%An_c%E1%BB%8F_xanh.jpg",
+        "link_thumbnail": "https://tiki.vn/blog/wp-content/uploads/2024/12/toi-thay-hoa-vang-tren-co-xanh-1.webp",
         "language": "Vietnamese",
         "country": "Vietnam",
         "visibility": "public",
@@ -224,34 +224,35 @@
       },
       {
         "ID": 7,
-        "title": "Nhật Ký Trong Tù",
+        "title": "The Diary of a Young Girl",
         "authors": [{
-          "name": "Hồ Chí Minh",
-          "birth": "19 tháng 5, 1890",
-          "pic": "https://tulieuvankien.dangcongsan.vn/Uploads/2019/4/5/16/Ho%20Chi%20Minh.jpg"
+          "name": "Anne Frank",
+          "birth": "12 June 1929",
+          "pic": "https://upload.wikimedia.org/wikipedia/commons/6/66/Anne_Frank_passport_photo%2C_May_1942.jpg"
         }],
-        "categories": ["Poetry", "Memoir"],
-        "description": "Nhật Ký Trong Tù là tập thơ của Chủ tịch Hồ Chí Minh, ghi lại những suy tư và cảm nhận của ông trong những năm tháng bị giam cầm tại Trung Quốc.",
-        "link_thumbnail": "https://file3.qdnd.vn/data/images/0/2023/05/12/hoanghoang/a.jpg?dpi=150&quality=100&w=870",
-        "language": "Vietnamese",
-        "country": "Vietnam",
+        "categories": ["Memoir", "History"],
+        "description": "The Diary of a Young Girl là nhật ký của Anne Frank, một cô gái Do Thái sống ẩn náu khỏi phát xít Đức trong Thế chiến thứ hai.",
+        "link_thumbnail": "https://m.media-amazon.com/images/I/51uaITHXSeL.jpg",
+        "language": "English",
+        "country": "Netherlands",
         "visibility": "public",
-        "view_count": 35000000,
-        "published_year": 1943,
-        "publisher": "NXB Sự Thật",
+        "view_count": 42000000,
+        "published_year": 1947,
+        "publisher": "Contact Publishing",
         "chapters": [
           {
             "chapter_id": 1,
-            "title": "Chương 1: Những Ngày Đầu",
-            "content": "Những cảm xúc và suy nghĩ của Hồ Chí Minh trong những ngày đầu bị giam cầm."
+            "title": "June 12, 1942",
+            "content": "Anne bắt đầu viết nhật ký vào ngày sinh nhật thứ 13 của mình, bày tỏ cảm xúc về cuộc sống và bạn bè."
           },
           {
             "chapter_id": 2,
-            "title": "Chương 2: Sự Mất Mát và Hy Vọng",
-            "content": "Chủ tịch Hồ Chí Minh thể hiện sự kiên cường và hy vọng dù bị giam giữ trong hoàn cảnh khắc nghiệt."
+            "title": "July 8, 1942",
+            "content": "Gia đình Frank bắt đầu sống ẩn náu sau khi chị gái Anne nhận được lệnh triệu tập từ Đức quốc xã."
           }
         ]
-      },
+      }
+      ,
       {
         "ID": 8,
         "title": "Harry Potter",

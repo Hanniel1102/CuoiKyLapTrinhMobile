@@ -39,10 +39,10 @@ export default function Login({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
           <Image source={require("../assets/Image/arrow-left.png")} style={styles.arrowIcon} />
         </TouchableOpacity>
-        <Text style={styles.header}>Sign In</Text>
+        <Text style={styles.header}>Log in</Text>
       </View>
 
       <View style={styles.layout}>
@@ -81,7 +81,7 @@ export default function Login({ navigation }) {
             <Switch
               value={rememberMe}
               onValueChange={(value) => setRememberMe(value)}
-              thumbColor={rememberMe ? "#008080" : "#ccc"}
+              thumbColor={rememberMe ? "#006666" : "#fff"}
             />
             <Text style={styles.rememberMeText}>Remember Me</Text>
           </View>
@@ -90,28 +90,30 @@ export default function Login({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.signInButton} onPress={handleLogin}>
-          <Text style={styles.signInButtonText}>Sign In</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.signInButton} onPress={handleLogin}>
+            <Text style={styles.signInButtonText}>Log in</Text>
+          </TouchableOpacity>
+        </View>
 
         <Text style={styles.signupText}>
           Don’t have an account?{" "}
           <Text style={styles.signupLink} onPress={() => navigation.navigate("SignUp")}>
-            Signup
+            Sign up
           </Text>
         </Text>
 
         <Text style={styles.orText}>OR</Text>
 
-        <TouchableOpacity style={[styles.socialButton, styles.facebookButton]}>
-          <Image source={require("../assets/Image/fb.png")} style={styles.socialIcon} />
-          <Text style={styles.socialButtonText}>Connect With Facebook</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={[styles.socialButton, styles.facebookButton]}>
+            <Image source={require("../assets/Image/face.png")} style={styles.socialIcon} />
+            <Text style={styles.socialButtonText}>Connect With Facebook</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.socialButton, styles.googleButton]}>
-          <Image source={require("../assets/Image/google.png")} style={styles.socialIcon} />
-          <Text style={styles.socialButtonText}>Connect With Google</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={[styles.socialButton, styles.googleButton]}>
+            <Image source={require("../assets/Image/google_icon.png")} style={styles.socialIcon} />
+            <Text style={styles.socialButtonText}>Connect With Google</Text>
+          </TouchableOpacity>
       </View>
     </View>
   );
@@ -120,15 +122,14 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgba(34, 33, 33, 0.56)",
+    backgroundColor:  "#fff",
   },
   headerContainer: {
     width: "100%",
-    height: 50,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
-    marginBottom: 120,
+    marginBottom: 70,
     marginTop: 50,
   },
   header: {
@@ -136,7 +137,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     alignItems: "center",
     marginLeft: "30%",
-    color: "#fff",
+    color: "#006666",
+    
   },
   arrowIcon: {
     width: 24,
@@ -154,28 +156,30 @@ const styles = StyleSheet.create({
   welcomeTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#fff",
+    color: "#006666",
   },
   welcomeSubtitle: {
-    fontSize: 16,
-    color: "#fff",
+    fontSize: 14,
+    color: "#000",
     marginTop: 5,
+    marginBottom: 10,
   },
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
     borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
+    borderColor: "#006666",
+    borderRadius: 25,
+    marginTop:10,
     marginBottom: 10,
     paddingHorizontal: 15,
-    backgroundColor: "rgba(225, 202, 238, 0.51)",
+    backgroundColor: "#fff",
     height: 50,
   },
   inputIcon: {
-    width: 24,
-    height: 24,
+    width: 20,
+    height: 20,
     marginRight: 10,
   },
   input: {
@@ -209,13 +213,19 @@ const styles = StyleSheet.create({
     color: "#008080",
     fontWeight: "bold",
   },
+  buttonContainer: {
+    alignItems: "center", 
+    justifyContent: "center",
+    marginVertical: 10, 
+  },
   signInButton: {
-    backgroundColor: "rgba(26, 155, 241, 0.9)",
-    paddingVertical: 15,
-    borderRadius: 10,
+    backgroundColor: "#008080",
+    paddingVertical: 13,
+    borderRadius: 40,
     alignItems: "center",
-    width: "100%",
-    marginBottom: 10,
+    justifyContent: "center",
+    width: "70%",
+    marginBottom: 10,    
   },
   signInButtonText: {
     color: "#fff",
@@ -225,8 +235,7 @@ const styles = StyleSheet.create({
   signupText: {
     textAlign: "center",
     fontSize: 14,
-    color: "#fff",
-    marginBottom: 10,
+    color: "#000",
   },
   signupLink: {
     color: "#008080",
@@ -234,10 +243,10 @@ const styles = StyleSheet.create({
   },
   orText: {
     textAlign: "center",
-    fontSize: 14,
-    color: "#fff",
-    marginTop: 10,
-    marginBottom: 25,
+    fontSize: 12,
+    color: "#008080",
+    marginTop: 20,
+    marginBottom: 20,
   },
   socialButton: {
     flexDirection: "row",
@@ -245,14 +254,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     paddingVertical: 12,
-    borderRadius: 10,
+    borderRadius: 25,
     marginBottom: 10,
   },
   facebookButton: {
-    backgroundColor: "#3b5998",
+    borderWidth: 1,
+    borderColor: "#3b5998",
   },
   googleButton: {
-    backgroundColor: "#db4a39",
+    borderWidth: 1,
+    borderColor: "#db4a39",
   },
   socialIcon: {
     width: 24,
@@ -260,8 +271,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   socialButtonText: {
-    color: "#fff",
-    fontSize: 16,
+    color: "#000",
+    fontSize: 14,
     fontWeight: "bold",
   },
 });
